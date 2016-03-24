@@ -97,7 +97,7 @@ namespace FamilySearchSample
                 //resture cursor
                 Cursor.Current = Cursors.Default;
 
-                //indicate authentication not unsuccessful
+                //indicate authentication unsuccessful
                 return false;
             }
         }
