@@ -19,7 +19,7 @@ namespace FamilySearchSample
         //Use the Sandbox
         bool useSandbox = true;
 
-        //Save Userinput ID Password and developer Key as properties
+        //Save Userinput-ID Password and developer Key as properties
         public string aUserID { get; set; }
         public string aPassword { get; set; }
         public string aDeveloperKey { get; set; }
