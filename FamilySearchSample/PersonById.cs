@@ -7,26 +7,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using FamilySearch.Api.Ft;
 
 namespace FamilySearchSample
 {
-    public partial class Authentication : Form
+    public partial class PersonById : Form
     {
-        public string resultUserId { get; set; }
-        public string resultPassword { get; set; }
-        public string resultDeveloperKey { get; set; }
 
+        public FamilySearchFamilyTree p_Ft { get; set; }
 
-        public Authentication()
+        //Get a authenticated familytree as parameter
+        public PersonById(FamilySearchFamilyTree ft)
         {
             InitializeComponent();
+
+            //save ft for use in this form
+            p_Ft = ft;
         }
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-            resultUserId = txtUserId.Text;
-            resultPassword = txtPassword.Text;
-            resultDeveloperKey = txtDeveloperKey.Text;
             DialogResult = DialogResult.OK;
             Close();
         }

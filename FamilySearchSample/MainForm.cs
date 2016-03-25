@@ -40,7 +40,7 @@ namespace FamilySearchSample
                     aUserID = myform.resultUserId;
                     aPassword = myform.resultPassword;
                     aDeveloperKey = myform.resultDeveloperKey;
-
+                                   
                     //Try to authenticate
                     if (authenticateMe(aUserID, aPassword, aDeveloperKey))
                     {
@@ -58,12 +58,13 @@ namespace FamilySearchSample
         /// </summary>
         public void enableButtons()
         {
-
+            btnFindById.Enabled = true;
         }
 
         /// <summary>
-        /// Authenticate Familytree Object
+        /// Authenticate Familytree Object.
         /// </summary>
+        /// <returns> True if authentication was successful, false otherwise</returns>
         /// <param name="pUserID">User ID from input</param>
         /// <param name="pPassword">Password from user input</param>
         /// <param name="pDeveloperKey">Developer Key from user input</param>
@@ -105,6 +106,15 @@ namespace FamilySearchSample
         private void btnExit_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void btnFindById_Click(object sender, EventArgs e)
+        {
+            using (var myForm = new PersonById(ft))
+            {
+                //dont care about return result at this point
+                myForm.ShowDialog();
+            }
         }
     }
 }

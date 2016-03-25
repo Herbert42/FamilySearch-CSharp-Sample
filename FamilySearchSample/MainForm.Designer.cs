@@ -34,6 +34,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.txtToken = new System.Windows.Forms.TextBox();
             this.btnExit = new System.Windows.Forms.Button();
+            this.btnFindById = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -91,12 +92,24 @@
             this.btnExit.UseVisualStyleBackColor = true;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
+            // btnFindById
+            // 
+            this.btnFindById.Enabled = false;
+            this.btnFindById.Location = new System.Drawing.Point(13, 83);
+            this.btnFindById.Name = "btnFindById";
+            this.btnFindById.Size = new System.Drawing.Size(167, 30);
+            this.btnFindById.TabIndex = 6;
+            this.btnFindById.Text = "Find Person by ID";
+            this.btnFindById.UseVisualStyleBackColor = true;
+            this.btnFindById.Click += new System.EventHandler(this.btnFindById_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Bisque;
             this.ClientSize = new System.Drawing.Size(696, 360);
+            this.Controls.Add(this.btnFindById);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.txtToken);
             this.Controls.Add(this.label3);
@@ -118,6 +131,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtToken;
         private System.Windows.Forms.Button btnExit;
+        private System.Windows.Forms.Button btnFindById;
     }
 }
 
