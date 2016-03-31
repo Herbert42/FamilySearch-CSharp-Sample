@@ -33,6 +33,9 @@
             this.btnRetriveById = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnOK = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtGender = new System.Windows.Forms.TextBox();
+            this.lblErrorMessage = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // txtPersonId
@@ -59,6 +62,7 @@
             this.btnRetriveById.TabIndex = 3;
             this.btnRetriveById.Text = "Retrieve";
             this.btnRetriveById.UseVisualStyleBackColor = true;
+            this.btnRetriveById.Click += new System.EventHandler(this.btnRetriveById_Click);
             // 
             // btnCancel
             // 
@@ -80,13 +84,41 @@
             this.btnOK.UseVisualStyleBackColor = true;
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(15, 45);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(42, 13);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "Gender";
+            // 
+            // txtGender
+            // 
+            this.txtGender.Location = new System.Drawing.Point(18, 62);
+            this.txtGender.Name = "txtGender";
+            this.txtGender.Size = new System.Drawing.Size(100, 20);
+            this.txtGender.TabIndex = 7;
+            // 
+            // lblErrorMessage
+            // 
+            this.lblErrorMessage.AutoSize = true;
+            this.lblErrorMessage.Location = new System.Drawing.Point(437, 15);
+            this.lblErrorMessage.Name = "lblErrorMessage";
+            this.lblErrorMessage.Size = new System.Drawing.Size(105, 13);
+            this.lblErrorMessage.TabIndex = 8;
+            this.lblErrorMessage.Text = "No current message.";
+            // 
             // PersonById
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(537, 278);
+            this.ClientSize = new System.Drawing.Size(664, 278);
+            this.Controls.Add(this.lblErrorMessage);
+            this.Controls.Add(this.txtGender);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnRetriveById);
@@ -106,5 +138,8 @@
         private System.Windows.Forms.Button btnRetriveById;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnOK;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox txtGender;
+        private System.Windows.Forms.Label lblErrorMessage;
     }
 }
