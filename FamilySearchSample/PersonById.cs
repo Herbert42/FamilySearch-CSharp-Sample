@@ -21,10 +21,9 @@ namespace FamilySearchSample
         public PersonById(FamilySearchFamilyTree ft)
         {
             InitializeComponent();
-
-            //save ft for use in this form
+            
+            //save ft (familytree object) for use in this form
             p_Ft = ft;
-           
         }
 
         private void btnOK_Click(object sender, EventArgs e)
@@ -40,7 +39,7 @@ namespace FamilySearchSample
                 lblErrorMessage.Text = "Please enter a Person ID.";
             }
             else
-            {
+            {   //result not needed at this point. Useful for future extensions
                 bool displayResult = displayPersonByIdData(txtPersonId.Text);
             }
         }
@@ -70,13 +69,48 @@ namespace FamilySearchSample
 
             //be on the safe side
             if (myPerson.Person != null)
-            {   
+            {
                 //person found
-                //display gender
+                //display some info about Person
                 txtGender.Text = myPerson.Person.DisplayExtension.Gender;
 
-                //todo display more
-               
+                chkLiving.Checked = myPerson.Person.Living;
+
+                txtLivespan.Text = myPerson.Person.DisplayExtension.Lifespan;
+
+                txtBirthDate.Text = myPerson.Person.DisplayExtension.BirthDate;
+
+                txtBirthPlace.Text = myPerson.Person.DisplayExtension.BirthPlace;
+
+                txtDeathDate.Text = myPerson.Person.DisplayExtension.DeathDate;
+
+                txtDeathPlace.Text = myPerson.Person.DisplayExtension.DeathPlace;
+
+                txtFullName.Text = myPerson.Person.DisplayExtension.Name;
+
+                //count of 1 is expected
+                lblErrorMessage.Text = "Count of Names: " + myPerson.Person.Names.Count;
+
+                //to avoid hard coded indecees:
+                //Note: If more than one name, last name found is displayed. 
+                foreach (var name in myPerson.Person.Names)
+                {
+                    //display Lang
+                    txtLang.Text = name.Lang;
+
+                    //Display name parts
+                    foreach (var part in name.NameForm.Parts)
+                    {
+                        if (part.KnownType == Gx.Types.NamePartType.Given)
+                        {
+                            txtGivenName.Text = part.Value;
+                        }
+                        if (part.KnownType == Gx.Types.NamePartType.Surname)
+                        {
+                            txtSurname.Text = part.Value;
+                        }
+                    }
+                }
             }
             else
             {
