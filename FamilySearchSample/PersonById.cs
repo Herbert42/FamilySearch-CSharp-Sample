@@ -91,7 +91,7 @@ namespace FamilySearchSample
                 //count of 1 is expected
                 lblErrorMessage.Text = "Count of Names: " + myPerson.Person.Names.Count;
 
-                //to avoid hard coded indecees:
+                //to avoid hard coded indices :
                 //Note: If more than one name, last name found is displayed. 
                 foreach (var name in myPerson.Person.Names)
                 {
