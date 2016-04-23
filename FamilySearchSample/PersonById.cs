@@ -21,8 +21,9 @@ namespace FamilySearchSample
         public PersonById(FamilySearchFamilyTree ft)
         {
             InitializeComponent();
-            
+
             //save ft (familytree object) for use in this form
+            //assumption: ft is initialized and ready to be used
             p_Ft = ft;
         }
 
@@ -34,13 +35,22 @@ namespace FamilySearchSample
 
         private void btnRetriveById_Click(object sender, EventArgs e)
         {
+            //try to display person info
             if (txtPersonId.Text == "")
             {
                 lblErrorMessage.Text = "Please enter a Person ID.";
             }
             else
-            {   //result not needed at this point. Useful for future extensions
-                bool displayResult = displayPersonByIdData(txtPersonId.Text);
+            {
+                //copy ID to label
+                lblDataForLabel.Text = txtPersonId.Text;
+
+                //first clear old results (if any)
+                clearAllTextBoxes(this.Controls);
+
+                //display person's data
+                //bool result not needed at this point. Useful for future extensions
+                bool displayResult = displayPersonByIdData(lblDataForLabel.Text);
             }
         }
 
@@ -53,6 +63,7 @@ namespace FamilySearchSample
         {
             //prepare Person
             PersonState myPerson;
+
             try
             {
                 //try to read Person by ID
@@ -70,26 +81,19 @@ namespace FamilySearchSample
             //be on the safe side
             if (myPerson.Person != null)
             {
-                //person found
-                //display some info about Person
+                //person found, display some info about Person
                 txtGender.Text = myPerson.Person.DisplayExtension.Gender;
-
                 chkLiving.Checked = myPerson.Person.Living;
-
                 txtLivespan.Text = myPerson.Person.DisplayExtension.Lifespan;
-
                 txtBirthDate.Text = myPerson.Person.DisplayExtension.BirthDate;
-
                 txtBirthPlace.Text = myPerson.Person.DisplayExtension.BirthPlace;
-
                 txtDeathDate.Text = myPerson.Person.DisplayExtension.DeathDate;
-
                 txtDeathPlace.Text = myPerson.Person.DisplayExtension.DeathPlace;
-
                 txtFullName.Text = myPerson.Person.DisplayExtension.Name;
 
-                //count of 1 is expected
-                lblErrorMessage.Text = "Count of Names: " + myPerson.Person.Names.Count;
+                //todo Clean this up
+                ////count of 1 is expected?, display for educational purpose
+                //lblErrorMessage.Text = "Count of Names: " + myPerson.Person.Names.Count;
 
                 //to avoid hard coded indices :
                 //Note: If more than one name, last name found is displayed. 
@@ -111,6 +115,25 @@ namespace FamilySearchSample
                         }
                     }
                 }
+
+                //try to find Birth under Facts
+                foreach (var myFact in myPerson.Person.Facts)
+                {
+                    // Fact a Birth Fact?
+                    if (myFact.KnownType == Gx.Types.FactType.Birth)
+                    {
+                        //Birth info found, display it
+                        txtDateOriginal.Text = myFact.Date.Original;
+                        txtDateFormal.Text = myFact.Date.Formal;
+
+                        //make sure List is not empty
+                        if (myFact.Date.NormalizedExtensions.Any())
+                        {
+                            //Hack Vorsicht: hard coded
+                            txtDateNormalized.Text = myFact.Date.NormalizedExtensions[0].Value;
+                        }
+                    }
+                }
             }
             else
             {
@@ -120,6 +143,26 @@ namespace FamilySearchSample
 
             //We are done: success
             return true;
+        }
+
+        /// <summary>
+        /// Recursively clear Text in all textboxes, regardless where they are on the form.
+        /// </summary>
+        /// <param name="parentObject">Collection of controls</param>
+        private void clearAllTextBoxes(Control.ControlCollection parentObject)
+        {
+            foreach (Control childObject in parentObject)
+            {
+                //See if we have a textBox
+                TextBox childTextBox = childObject as TextBox;
+
+                if (childTextBox != null)
+                    //TextBox found
+                    childTextBox.Clear();
+                else
+                    //Not a textBox, keep looking
+                    clearAllTextBoxes(childObject.Controls);
+            }
         }
     }
 }

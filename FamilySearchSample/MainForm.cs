@@ -68,7 +68,7 @@ namespace FamilySearchSample
         /// <param name="pUserID">User ID from input</param>
         /// <param name="pPassword">Password from user input</param>
         /// <param name="pDeveloperKey">Developer Key from user input</param>
-        public bool authenticateMe(string pUserID, string pPassword, string pDeveloperKey)
+        private bool authenticateMe(string pUserID, string pPassword, string pDeveloperKey)
         {
             //We start with Wait Cursor
             Cursor.Current = Cursors.WaitCursor;
