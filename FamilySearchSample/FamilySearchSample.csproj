@@ -117,6 +117,12 @@
     <Compile Include="Authentication.Designer.cs">
       <DependentUpon>Authentication.cs</DependentUpon>
     </Compile>
+    <Compile Include="CurrentUser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CurrentUser.Designer.cs">
+      <DependentUpon>CurrentUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

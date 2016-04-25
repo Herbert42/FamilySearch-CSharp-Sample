@@ -7,18 +7,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using FamilySearch.Api;
 using FamilySearch.Api.Ft;
 using Gx.Rs.Api;
 
 namespace FamilySearchSample
 {
-    public partial class PersonById : Form
+    public partial class CurrentUser : Form
     {
 
         public FamilySearchFamilyTree p_Ft { get; set; }
 
         //Get a authenticated familytree as parameter
-        public PersonById(FamilySearchFamilyTree ft)
+        public CurrentUser(FamilySearchFamilyTree ft)
         {
             InitializeComponent();
 
@@ -35,6 +36,7 @@ namespace FamilySearchSample
 
         private void btnRetriveById_Click(object sender, EventArgs e)
         {
+            //toda remove this code
             //try to display person info
             if (txtPersonId.Text == "")
             {
@@ -163,6 +165,43 @@ namespace FamilySearchSample
                     //Not a textBox, keep looking
                     clearAllTextBoxes(childObject.Controls);
             }
+        }
+
+        /// <summary>
+        /// Collect data and display on form. Done before calling showDialog
+        /// Entry Point before form is displayed
+        /// </summary>
+        /// <returns>true if successful, false otherwise</returns>
+        public bool prepareData()
+        {
+            //define local helper variable
+            UserState myUser;
+
+            try
+            {
+                //get current user
+                myUser = p_Ft.ReadCurrentUser();
+            }
+            catch 
+            {
+                //return false for failure
+                return false;
+            }
+
+            //ID to label
+            lblDataForLabel.Text = myUser.User.PersonId;
+
+            //first clear old results (if any)
+            clearAllTextBoxes(this.Controls);
+
+            //display person's data
+            //bool result not needed at this point. Intended for future extensions
+            bool displayResult = displayPersonByIdData(lblDataForLabel.Text);
+
+
+
+            //report: action was unsuccessful
+            return true;
         }
     }
 }

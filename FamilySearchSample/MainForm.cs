@@ -40,7 +40,7 @@ namespace FamilySearchSample
                     aUserID = myform.resultUserId;
                     aPassword = myform.resultPassword;
                     aDeveloperKey = myform.resultDeveloperKey;
-                                   
+
                     //Try to authenticate
                     if (authenticateMe(aUserID, aPassword, aDeveloperKey))
                     {
@@ -59,6 +59,7 @@ namespace FamilySearchSample
         public void enableButtons()
         {
             btnFindById.Enabled = true;
+            btnCurrentUser.Enabled = true;
         }
 
         /// <summary>
@@ -95,7 +96,7 @@ namespace FamilySearchSample
                 //Display Error Message
                 txtToken.Text = "Error " + myError.Message.ToString();
 
-                //resture cursor
+                //restore cursor
                 Cursor.Current = Cursors.Default;
 
                 //indicate authentication unsuccessful
@@ -114,6 +115,26 @@ namespace FamilySearchSample
             {
                 //dont care about return result at this point
                 myForm.ShowDialog();
+            }
+        }
+
+        private void btnCurrentUser_Click(object sender, EventArgs e)
+        {
+            using (var myCurrentUserForm = new CurrentUser(ft))
+            {
+                //We start with Wait Cursor
+                Cursor.Current = Cursors.WaitCursor;
+
+                //See if we can collect and prepare data on form
+                if (myCurrentUserForm.prepareData())
+                {
+                    //Display Data. Dont care about return result at this point (again)
+                    myCurrentUserForm.ShowDialog();
+                }
+                //todo else give some feedback
+
+                //Restore Cursor
+                Cursor.Current = Cursors.Default;
             }
         }
     }

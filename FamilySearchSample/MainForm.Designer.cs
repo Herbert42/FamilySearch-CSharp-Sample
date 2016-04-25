@@ -35,6 +35,7 @@
             this.txtToken = new System.Windows.Forms.TextBox();
             this.btnExit = new System.Windows.Forms.Button();
             this.btnFindById = new System.Windows.Forms.Button();
+            this.btnCurrentUser = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -103,12 +104,24 @@
             this.btnFindById.UseVisualStyleBackColor = true;
             this.btnFindById.Click += new System.EventHandler(this.btnFindById_Click);
             // 
+            // btnCurrentUser
+            // 
+            this.btnCurrentUser.Enabled = false;
+            this.btnCurrentUser.Location = new System.Drawing.Point(13, 119);
+            this.btnCurrentUser.Name = "btnCurrentUser";
+            this.btnCurrentUser.Size = new System.Drawing.Size(167, 30);
+            this.btnCurrentUser.TabIndex = 7;
+            this.btnCurrentUser.Text = "Current User";
+            this.btnCurrentUser.UseVisualStyleBackColor = true;
+            this.btnCurrentUser.Click += new System.EventHandler(this.btnCurrentUser_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Bisque;
             this.ClientSize = new System.Drawing.Size(696, 360);
+            this.Controls.Add(this.btnCurrentUser);
             this.Controls.Add(this.btnFindById);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.txtToken);
@@ -132,6 +145,7 @@
         private System.Windows.Forms.TextBox txtToken;
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Button btnFindById;
+        private System.Windows.Forms.Button btnCurrentUser;
     }
 }
 
