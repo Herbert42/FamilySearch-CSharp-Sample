@@ -44,14 +44,12 @@ namespace FamilySearchSample
                     //Try to authenticate
                     if (authenticateMe(aUserID, aPassword, aDeveloperKey))
                     {
-                        //Display accrss token
+                        //Display access token
                         txtToken.Text = ft.CurrentAccessToken;
                     }
                 }
             }
         }
-
-        // ==============================================================================================
 
         /// <summary>
         /// Enable Buttons, normally done after successful authentication.
@@ -60,6 +58,7 @@ namespace FamilySearchSample
         {
             btnFindById.Enabled = true;
             btnCurrentUser.Enabled = true;
+            btnReadPersonFamily.Enabled = true;
         }
 
         /// <summary>
@@ -135,6 +134,15 @@ namespace FamilySearchSample
 
                 //Restore Cursor
                 Cursor.Current = Cursors.Default;
+            }
+        }
+
+        private void btnReadPersonFamily_Click(object sender, EventArgs e)
+        {
+            using (var myReadPersonsFamilyForm = new PersonFamily(ft))
+            {
+                //dont care about return result at this point
+                myReadPersonsFamilyForm.ShowDialog();
             }
         }
     }

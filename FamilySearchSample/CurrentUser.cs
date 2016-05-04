@@ -34,28 +34,6 @@ namespace FamilySearchSample
             Close();
         }
 
-        private void btnRetriveById_Click(object sender, EventArgs e)
-        {
-            //toda remove this code
-            //try to display person info
-            if (txtPersonId.Text == "")
-            {
-                lblErrorMessage.Text = "Please enter a Person ID.";
-            }
-            else
-            {
-                //copy ID to label
-                lblDataForLabel.Text = txtPersonId.Text;
-
-                //first clear old results (if any)
-                clearAllTextBoxes(this.Controls);
-
-                //display person's data
-                //bool result not needed at this point. Intended for future extensions
-                bool displayResult = displayPersonByIdData(lblDataForLabel.Text);
-            }
-        }
-
         /// <summary>
         /// Display person data for PersonById Form. Displays error message as needed.
         /// </summary>
@@ -63,7 +41,7 @@ namespace FamilySearchSample
         /// <returns>true if successful, false otherwise</returns>
         private bool displayPersonByIdData(string personID)
         {
-            //prepare Person
+            //define local helper variable
             PersonState myPerson;
 
             try
@@ -93,11 +71,7 @@ namespace FamilySearchSample
                 txtDeathPlace.Text = myPerson.Person.DisplayExtension.DeathPlace;
                 txtFullName.Text = myPerson.Person.DisplayExtension.Name;
 
-                //todo Clean this up
-                ////count of 1 is expected?, display for educational purpose
-                //lblErrorMessage.Text = "Count of Names: " + myPerson.Person.Names.Count;
-
-                //to avoid hard coded indices :
+                //count of 1 is expected?
                 //Note: If more than one name, last name found is displayed. 
                 foreach (var name in myPerson.Person.Names)
                 {
@@ -139,7 +113,7 @@ namespace FamilySearchSample
             }
             else
             {
-                //no peron found return false for failure
+                //no peron found, return false for failure
                 return false;
             }
 
@@ -188,18 +162,16 @@ namespace FamilySearchSample
                 return false;
             }
 
-            //ID to label
-            lblDataForLabel.Text = myUser.User.PersonId;
+            //Write ID from user profile to label
+            lblUserID.Text = myUser.User.PersonId;
 
-            //first clear old results (if any)
-            clearAllTextBoxes(this.Controls);
+            //clear old results (if any)
+            clearAllTextBoxes(Controls);
 
             //display person's data
             //bool result not needed at this point. Intended for future extensions
-            bool displayResult = displayPersonByIdData(lblDataForLabel.Text);
-
-
-
+            bool displayResult = displayPersonByIdData(lblUserID.Text);
+           
             //report: action was unsuccessful
             return true;
         }

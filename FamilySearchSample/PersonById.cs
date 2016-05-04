@@ -43,14 +43,14 @@ namespace FamilySearchSample
             else
             {
                 //copy ID to label
-                lblDataForLabel.Text = txtPersonId.Text;
+                lblPersonID.Text = txtPersonId.Text;
 
                 //first clear old results (if any)
                 clearAllTextBoxes(this.Controls);
 
                 //display person's data
                 //bool result not needed at this point. Intended for future extensions
-                bool displayResult = displayPersonByIdData(lblDataForLabel.Text);
+                bool displayResult = displayPersonByIdData(lblPersonID.Text);
             }
         }
 

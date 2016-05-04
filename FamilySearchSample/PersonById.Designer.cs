@@ -58,7 +58,7 @@
             this.txtLang = new System.Windows.Forms.TextBox();
             this.txtDateOriginal = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
-            this.lblDataForLabel = new System.Windows.Forms.Label();
+            this.lblPersonID = new System.Windows.Forms.Label();
             this.txtDateFormal = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.txtDateNormalized = new System.Windows.Forms.TextBox();
@@ -328,14 +328,14 @@
             this.label13.TabIndex = 30;
             this.label13.Text = "Date - Original";
             // 
-            // lblDataForLabel
+            // lblPersonID
             // 
-            this.lblDataForLabel.AutoSize = true;
-            this.lblDataForLabel.Location = new System.Drawing.Point(8, 45);
-            this.lblDataForLabel.Name = "lblDataForLabel";
-            this.lblDataForLabel.Size = new System.Drawing.Size(18, 13);
-            this.lblDataForLabel.TabIndex = 32;
-            this.lblDataForLabel.Text = "ID";
+            this.lblPersonID.AutoSize = true;
+            this.lblPersonID.Location = new System.Drawing.Point(8, 45);
+            this.lblPersonID.Name = "lblPersonID";
+            this.lblPersonID.Size = new System.Drawing.Size(18, 13);
+            this.lblPersonID.TabIndex = 32;
+            this.lblPersonID.Text = "ID";
             // 
             // txtDateFormal
             // 
@@ -392,7 +392,7 @@
             this.Controls.Add(this.label15);
             this.Controls.Add(this.txtDateFormal);
             this.Controls.Add(this.label14);
-            this.Controls.Add(this.lblDataForLabel);
+            this.Controls.Add(this.lblPersonID);
             this.Controls.Add(this.txtDateOriginal);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.label12);
@@ -462,7 +462,7 @@
         private System.Windows.Forms.TextBox txtLang;
         private System.Windows.Forms.TextBox txtDateOriginal;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Label lblDataForLabel;
+        private System.Windows.Forms.Label lblPersonID;
         private System.Windows.Forms.TextBox txtDateFormal;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.TextBox txtDateNormalized;
