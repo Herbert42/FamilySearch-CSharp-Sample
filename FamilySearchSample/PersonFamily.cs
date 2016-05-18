@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using FamilySearch.Api.Ft;
 using Gx.Rs.Api;
+using Gx.Conclusion;
+using Gx.Fs.Tree;
+using Gx.Types;
 
 namespace FamilySearchSample
 {
@@ -85,52 +88,55 @@ namespace FamilySearchSample
             //Be on the save side.
             if (myPerson.Person != null)
             {
+                //Get the headline out.
                 listBoxDisplayFacts.Items.Add("Family Facts for " + personID
                     + " (" + myPerson.Person.DisplayExtension.Name + ")");
 
                 //Get the parents
                 myParents = myPerson.ReadParents();
 
-                //look in myParents Persons for parents names and dates
-                //myParents.Persons = list of parents
-                // change this to "??"
-                if (myParents.Persons != null)
+                //look in myParents.Persons for parents names and dates
+                foreach (var person in myParents.Persons ?? new List<Person>())
                 {
-                    //Cycle through
-                    foreach (var person in myParents.Persons)
+                    if (person.Gender.KnownType == GenderType.Male)
                     {
-                        if (person.Gender.KnownType == Gx.Types.GenderType.Male)
-                        {
-                            //Father found.
-                            listBoxDisplayFacts.Items.Add("Father: " + person.Id
-                                + " (" + person.DisplayExtension.Name + ")"
-                                + " Lifespan " + person.DisplayExtension.Lifespan);
+                        //Father found.
+                        listBoxDisplayFacts.Items.Add("Father: " + person.Id
+                            + " (" + person.DisplayExtension.Name + ")"
+                            + " Lifespan " + person.DisplayExtension.Lifespan);
 
-                            foreach (var relationship in myPerson.ChildAndParentsRelationships ?? new List<Gx.Fs.Tree.ChildAndParentsRelationship>())
+                        //Read Relationships
+                        foreach (var relationship in myPerson.ChildAndParentsRelationships ?? new List<ChildAndParentsRelationship>())
+                        {
+                            //Show Father ID
+                            listBoxDisplayFacts.Items.Add("Father rescource ID: " + relationship.Father.ResourceId);
+
+                            //Show Relationship
+                            foreach (var aFact in relationship.FatherFacts ?? new List<Fact>())
                             {
-                                listBoxDisplayFacts.Items.Add("Father rescource ID: " + relationship.Father.ResourceId);
-                                foreach (var aFact in relationship.FatherFacts ?? new List<Gx.Conclusion.Fact>())
-                                {
-                                    listBoxDisplayFacts.Items.Add(aFact.KnownType.ToString());
-                                }
+                                listBoxDisplayFacts.Items.Add(aFact.KnownType.ToString());
                             }
                         }
+                    }
 
-                        if (person.Gender.KnownType == Gx.Types.GenderType.Female)
+                    if (person.Gender.KnownType == GenderType.Female)
+                    {
+                        //Mother found.
+                        listBoxDisplayFacts.Items.Add("Mother: " + person.Id
+                            + " (" + person.DisplayExtension.Name + ")"
+                            + " Lifespan " + person.DisplayExtension.Lifespan
+                            );
+
+                        //Read Relationships
+                        foreach (var relationship in myPerson.ChildAndParentsRelationships ?? new List<ChildAndParentsRelationship>())
                         {
-                            //Mother found.
-                            listBoxDisplayFacts.Items.Add("Mother: " + person.Id
-                                + " (" + person.DisplayExtension.Name + ")"
-                                + " Lifespan " + person.DisplayExtension.Lifespan
-                                );
+                            //Show Mother ID
+                            listBoxDisplayFacts.Items.Add("Mother rescource ID: " + relationship.Mother.ResourceId);
 
-                            foreach (var relationship in myPerson.ChildAndParentsRelationships ?? new List<Gx.Fs.Tree.ChildAndParentsRelationship>())
+                            //Read Relationships
+                            foreach (var aFact in relationship.MotherFacts ?? new List<Fact>())
                             {
-                                listBoxDisplayFacts.Items.Add("Mother rescource ID: " + relationship.Mother.ResourceId);
-                                foreach (var aFact in relationship.MotherFacts ?? new List<Gx.Conclusion.Fact>())
-                                {
-                                    listBoxDisplayFacts.Items.Add(aFact.KnownType.ToString());
-                                }
+                                listBoxDisplayFacts.Items.Add(aFact.KnownType.ToString());
                             }
                         }
                     }
