@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.btnAuthenticate = new System.Windows.Forms.Button();
@@ -37,6 +38,7 @@
             this.btnFindById = new System.Windows.Forms.Button();
             this.btnCurrentUser = new System.Windows.Forms.Button();
             this.btnReadPersonFamily = new System.Windows.Forms.Button();
+            this.toolTipMainForm = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
             // label1
@@ -64,6 +66,7 @@
             this.btnAuthenticate.Size = new System.Drawing.Size(168, 30);
             this.btnAuthenticate.TabIndex = 2;
             this.btnAuthenticate.Text = "Authenticate";
+            this.toolTipMainForm.SetToolTip(this.btnAuthenticate, "Start here to enter your credentials.");
             this.btnAuthenticate.UseVisualStyleBackColor = true;
             this.btnAuthenticate.Click += new System.EventHandler(this.btnAuthenticate_Click);
             // 
@@ -127,6 +130,13 @@
             this.btnReadPersonFamily.UseVisualStyleBackColor = true;
             this.btnReadPersonFamily.Click += new System.EventHandler(this.btnReadPersonFamily_Click);
             // 
+            // toolTipMainForm
+            // 
+            this.toolTipMainForm.AutoPopDelay = 5000;
+            this.toolTipMainForm.InitialDelay = 250;
+            this.toolTipMainForm.IsBalloon = true;
+            this.toolTipMainForm.ReshowDelay = 100;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -160,6 +170,7 @@
         private System.Windows.Forms.Button btnFindById;
         private System.Windows.Forms.Button btnCurrentUser;
         private System.Windows.Forms.Button btnReadPersonFamily;
+        private System.Windows.Forms.ToolTip toolTipMainForm;
     }
 }
 

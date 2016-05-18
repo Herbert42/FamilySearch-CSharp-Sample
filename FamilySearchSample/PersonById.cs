@@ -8,7 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using FamilySearch.Api.Ft;
-using Gx.Rs.Api;
+using Gx.Rs.Api;  
+
 
 namespace FamilySearchSample
 {
@@ -22,8 +23,8 @@ namespace FamilySearchSample
         {
             InitializeComponent();
 
-            //save ft (familytree object) for use in this form
-            //assumption: ft is initialized and ready to be used
+            //Save ft (familytree object) for use in this form
+            //Assumption: ft is initialized and ready to be used
             p_Ft = ft;
         }
 
@@ -35,20 +36,20 @@ namespace FamilySearchSample
 
         private void btnRetriveById_Click(object sender, EventArgs e)
         {
-            //try to display person info
+            //Try to display person info
             if (txtPersonId.Text == "")
             {
                 lblErrorMessage.Text = "Please enter a Person ID.";
             }
             else
             {
-                //copy ID to label
+                //Copy ID to label
                 lblPersonID.Text = txtPersonId.Text;
 
-                //first clear old results (if any)
-                clearAllTextBoxes(this.Controls);
+                //First clear old results (if any)
+                HerbsTools.clearAllTextBoxes(this.Controls);
 
-                //display person's data
+                //Display person's data
                 //bool result not needed at this point. Intended for future extensions
                 bool displayResult = displayPersonByIdData(lblPersonID.Text);
             }
@@ -61,27 +62,27 @@ namespace FamilySearchSample
         /// <returns>true if successful, false otherwise</returns>
         private bool displayPersonByIdData(string personID)
         {
-            //prepare Person
+            //Prepare Person
             PersonState myPerson;
 
             try
             {
-                //try to read Person by ID
+                //Try to read Person by ID
                 myPerson = p_Ft.ReadPersonById(personID);
             }
             catch (Exception myError)
             {
-                //display error
+                //Display error
                 lblErrorMessage.Text = myError.Message.ToString();
 
-                //return false for failure
+                //Return false for failure
                 return false;
             }
 
-            //be on the safe side
+            //Be on the safe side
             if (myPerson.Person != null)
             {
-                //person found, display some info about Person
+                //Person found, display some info about Person
                 txtGender.Text = myPerson.Person.DisplayExtension.Gender;
                 chkLiving.Checked = myPerson.Person.Living;
                 txtLivespan.Text = myPerson.Person.DisplayExtension.Lifespan;
@@ -91,15 +92,15 @@ namespace FamilySearchSample
                 txtDeathPlace.Text = myPerson.Person.DisplayExtension.DeathPlace;
                 txtFullName.Text = myPerson.Person.DisplayExtension.Name;
 
-                //todo Clean this up
-                ////count of 1 is expected?, display for educational purpose
+                //Todo Clean this up
+                //Count of 1 is expected?, display for educational purpose
                 //lblErrorMessage.Text = "Count of Names: " + myPerson.Person.Names.Count;
 
-                //to avoid hard coded indices :
+                //To avoid hard coded indices :
                 //Note: If more than one name, last name found is displayed. 
                 foreach (var name in myPerson.Person.Names)
                 {
-                    //display Lang
+                    //Display Lang
                     txtLang.Text = name.Lang;
 
                     //Display name parts
@@ -116,17 +117,17 @@ namespace FamilySearchSample
                     }
                 }
 
-                //try to find Birth under Facts
+                //Try to find Birth under Facts
                 foreach (var myFact in myPerson.Person.Facts)
                 {
-                    // Fact a Birth Fact?
+                    //Fact a Birth Fact?
                     if (myFact.KnownType == Gx.Types.FactType.Birth)
                     {
                         //Birth info found, display it
                         txtDateOriginal.Text = myFact.Date.Original;
                         txtDateFormal.Text = myFact.Date.Formal;
 
-                        //make sure List is not empty
+                        //Make sure List is not empty
                         if (myFact.Date.NormalizedExtensions.Any())
                         {
                             //Hack Vorsicht: hard coded
@@ -137,32 +138,11 @@ namespace FamilySearchSample
             }
             else
             {
-                //no peron found return false for failure
+                //No peron found return false for failure
                 return false;
             }
-
             //We are done: success
             return true;
-        }
-
-        /// <summary>
-        /// Recursively clear Text in all textboxes, regardless where they are on the form.
-        /// </summary>
-        /// <param name="parentObject">Collection of controls</param>
-        private void clearAllTextBoxes(Control.ControlCollection parentObject)
-        {
-            foreach (Control childObject in parentObject)
-            {
-                //See if we have a textBox
-                TextBox childTextBox = childObject as TextBox;
-
-                if (childTextBox != null)
-                    //TextBox found
-                    childTextBox.Clear();
-                else
-                    //Not a textBox, keep looking
-                    clearAllTextBoxes(childObject.Controls);
-            }
-        }
+        } 
     }
 }

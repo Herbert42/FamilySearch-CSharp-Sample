@@ -13,7 +13,7 @@ namespace FamilySearchSample
 {
     public partial class MainForm : Form
     {
-        //global Family search tree
+        //Family search tree
         FamilySearchFamilyTree ft;
 
         //Use the Sandbox

@@ -22,6 +22,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>
+    </DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -123,6 +125,7 @@
     <Compile Include="CurrentUser.Designer.cs">
       <DependentUpon>CurrentUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="HerbsTools.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
