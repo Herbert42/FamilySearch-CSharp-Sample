@@ -11,6 +11,7 @@ using FamilySearch.Api;
 using FamilySearch.Api.Ft;
 using Gx.Rs.Api;
 
+
 namespace FamilySearchSample
 {
     public partial class CurrentUser : Form
@@ -119,28 +120,8 @@ namespace FamilySearchSample
 
             //We are done: success
             return true;
-        }
-
-        /// <summary>
-        /// Recursively clear Text in all textboxes, regardless where they are on the form.
-        /// </summary>
-        /// <param name="parentObject">Collection of controls</param>
-        private void clearAllTextBoxes(Control.ControlCollection parentObject)
-        {
-            foreach (Control childObject in parentObject)
-            {
-                //See if we have a textBox
-                TextBox childTextBox = childObject as TextBox;
-
-                if (childTextBox != null)
-                    //TextBox found
-                    childTextBox.Clear();
-                else
-                    //Not a textBox, keep looking
-                    clearAllTextBoxes(childObject.Controls);
-            }
-        }
-
+        }    
+        
         /// <summary>
         /// Collect data and display on form. Done before calling showDialog
         /// Entry Point before form is displayed
@@ -166,7 +147,7 @@ namespace FamilySearchSample
             lblUserID.Text = myUser.User.PersonId;
 
             //clear old results (if any)
-            clearAllTextBoxes(Controls);
+            HerbsTools.clearAllTextBoxes(Controls);
 
             //display person's data
             //bool result not needed at this point. Intended for future extensions
