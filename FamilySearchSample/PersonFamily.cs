@@ -64,13 +64,13 @@ namespace FamilySearchSample
         /// <summary>
         /// Display FamilyFacts of a person by ID.
         /// </summary>
-        /// <param name="personID"></param>
+        /// <param name="personID">Person ID whose parents are examined</param>
         /// <returns>True if successful, false otherwise.</returns>
         private bool displayPersonsFamilyByID(string personID)
         {
             //Prepare Person.
             FamilyTreePersonState myPerson;
-           
+
             //First Clear Listbox, making room for new Facts.
             listBoxDisplayFacts.Items.Clear();
 
@@ -100,9 +100,9 @@ namespace FamilySearchSample
         }
 
         /// <summary>
-        /// Display some Facts about a Persons Family on the form.
+        /// Main procedure to display some Facts about a Persons Family on the form.
         /// </summary>
-        /// <param name="pPerson">Person to be displayed</param>
+        /// <param name="pPerson">Person whose family is to be displayed</param>
         private void showFamilyFacts(FamilyTreePersonState pPerson)
         {
             //Define Parents
@@ -110,58 +110,108 @@ namespace FamilySearchSample
 
             //Get a headline out.
             listBoxDisplayFacts.Items.Add("Family Facts for " + pPerson.Person.Id
-                + " (" + pPerson.Person.DisplayExtension.Name + ")");
+                + " (" + pPerson.Person.DisplayExtension.Name + ")"
+                + " Lifespan " + pPerson.Person.DisplayExtension.Lifespan);
+
+            //Add a little separation after displaying headline.
+            listBoxDisplayFacts.Items.Add(" ");
 
             //Get the parents.
             myParents = pPerson.ReadParents();
 
-            //look in myParents.Persons for parents names and dates.
-            foreach (var person in myParents.Persons ?? new List<Person>())
+            //Look in myParents.Persons for parents, names, and dates.
+            foreach (var parentFound in myParents.Persons ?? new List<Person>())
             {
-                //Handle Father.
-                if (person.Gender.KnownType == GenderType.Male)
+                //Display all Father Facts on the form.
+                displayAllFatherFacts(parentFound, pPerson);
+
+                //Display all Mother Facts on the form.
+                displayAllMotherFacts(parentFound, pPerson);
+            }
+        }
+
+        /// <summary>
+        /// Display all Father Facts
+        /// </summary>
+        /// <param name="parentFound">A parent that ws found.</param>
+        /// <param name="pFTPerson">The original Familytree Person.</param>
+        private void displayAllFatherFacts(Person parentFound, FamilyTreePersonState pFTPerson)
+        {
+            //Look at Father Facts only
+            if (parentFound.Gender.KnownType == GenderType.Male)
+            {
+                //Show Father headline.
+                listBoxDisplayFacts.Items.Add("Father: " + parentFound.Id
+                    + " (" + parentFound.DisplayExtension.Name + ")"
+                    + " Lifespan " + parentFound.DisplayExtension.Lifespan);
+
+                //Read Relationships.
+                foreach (var relationship in pFTPerson.ChildAndParentsRelationships ?? new List<ChildAndParentsRelationship>())
                 {
-                    //Father found.
-                    listBoxDisplayFacts.Items.Add("Father: " + person.Id
-                        + " (" + person.DisplayExtension.Name + ")"
-                        + " Lifespan " + person.DisplayExtension.Lifespan);
-
-                    //Read Relationships.
-                    foreach (var relationship in pPerson.ChildAndParentsRelationships ?? new List<ChildAndParentsRelationship>())
-                    {
-                        //Show Father ID.
-                        listBoxDisplayFacts.Items.Add("Father rescource ID: " + relationship.Father.ResourceId);
-
-                        //Show Relationship.
-                        foreach (var aFact in relationship.FatherFacts ?? new List<Fact>())
-                        {
-                            listBoxDisplayFacts.Items.Add(aFact.KnownType.ToString());
-                        }
-                    }
+                    //Display Father Relationship facts on form.
+                    displayFatherRelationship(relationship);
                 }
+                //Add a little separation after displaying facts.
+                listBoxDisplayFacts.Items.Add(" ");
+            }
+        }
 
-                //Handle Mother.
-                if (person.Gender.KnownType == GenderType.Female)
+        /// <summary>
+        /// Displays all Mother Facts.
+        /// </summary>
+        /// <param name="parentFound">A parent that was found.</param>
+        /// <param name="pFtPerson">The original Familytree Person.</param>
+        private void displayAllMotherFacts(Person parentFound, FamilyTreePersonState pFtPerson)
+        {
+            //Look at Mother Facts only
+            if (parentFound.Gender.KnownType == GenderType.Female)
+            {
+                //Show Mother headline.
+                listBoxDisplayFacts.Items.Add("Mother: " + parentFound.Id
+                    + " (" + parentFound.DisplayExtension.Name + ")"
+                    + " Lifespan " + parentFound.DisplayExtension.Lifespan
+                    );
+
+                //Read Relationships.
+                foreach (var relationship in pFtPerson.ChildAndParentsRelationships ?? new List<ChildAndParentsRelationship>())
                 {
-                    //Mother found.
-                    listBoxDisplayFacts.Items.Add("Mother: " + person.Id
-                        + " (" + person.DisplayExtension.Name + ")"
-                        + " Lifespan " + person.DisplayExtension.Lifespan
-                        );
-
-                    //Read Relationships.
-                    foreach (var relationship in pPerson.ChildAndParentsRelationships ?? new List<ChildAndParentsRelationship>())
-                    {
-                        //Show Mother ID.
-                        listBoxDisplayFacts.Items.Add("Mother rescource ID: " + relationship.Mother.ResourceId);
-
-                        //Read Relationships.
-                        foreach (var aFact in relationship.MotherFacts ?? new List<Fact>())
-                        {
-                            listBoxDisplayFacts.Items.Add(aFact.KnownType.ToString());
-                        }
-                    }
+                    //Display Mother Relationship facts on form.
+                    displayMotherRelationship(relationship);
                 }
+                //Add a little separation after displaying facts.
+                listBoxDisplayFacts.Items.Add(" ");
+            }
+        }
+
+        /// <summary>
+        /// Display Father Relationship facts.
+        /// </summary>
+        /// <param name="pRelationship">Relationship of Father.</param>
+        private void displayFatherRelationship(ChildAndParentsRelationship pRelationship)
+        {
+            //Show Father ID.
+            listBoxDisplayFacts.Items.Add("Father rescource ID: " + pRelationship.Father.ResourceId);
+
+            //Show Relationship.
+            foreach (var aFact in pRelationship.FatherFacts ?? new List<Fact>())
+            {
+                listBoxDisplayFacts.Items.Add(aFact.KnownType.ToString());
+            }
+        }
+
+        /// <summary>
+        /// Display Mother Relationship facts.
+        /// </summary>
+        /// <param name="pRelationship">Relationship of Mother</param>
+        private void displayMotherRelationship(ChildAndParentsRelationship pRelationship)
+        {
+            //Show Mother ID.
+            listBoxDisplayFacts.Items.Add("Mother rescource ID: " + pRelationship.Mother.ResourceId);
+
+            //Show Relationship.
+            foreach (var aFact in pRelationship.MotherFacts ?? new List<Fact>())
+            {
+                listBoxDisplayFacts.Items.Add(aFact.KnownType.ToString());
             }
         }
 
