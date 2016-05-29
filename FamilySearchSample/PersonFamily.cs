@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using FamilySearch.Api.Ft;
-using Gx.Rs.Api;
 using Gx.Conclusion;
 using Gx.Fs.Tree;
+using Gx.Rs.Api;
 using Gx.Types;
 
 namespace FamilySearchSample
@@ -47,6 +47,10 @@ namespace FamilySearchSample
             }
             else
             {
+                //We actually do thomething. Remember cursor and change to wait-cursor.
+                var cursorState = this.Cursor;
+                this.Cursor = Cursors.WaitCursor;
+
                 //Copy ID to label. This way it is visible and saved.
                 lblPersonID.Text = txtPersonId.Text;
 
@@ -57,7 +61,10 @@ namespace FamilySearchSample
                 //Boolean result not needed at this point. Intended for future extensions.
                 bool displayResult = displayPersonsFamilyByID(lblPersonID.Text);
 
-                //todo use displayResult for message lable if you evaluate displayResult. 
+                //Restore Cursor.
+                this.Cursor = cursorState;
+
+                //todo use displayResult for message lable, if you evaluate displayResult. 
             }
         }
 
@@ -105,9 +112,6 @@ namespace FamilySearchSample
         /// <param name="pPerson">Person whose family is to be displayed</param>
         private void showFamilyFacts(FamilyTreePersonState pPerson)
         {
-            //Define Parents
-            PersonParentsState myParents;
-
             //Get a headline out.
             listBoxDisplayFacts.Items.Add("Family Facts for " + pPerson.Person.Id
                 + " (" + pPerson.Person.DisplayExtension.Name + ")"
@@ -116,18 +120,105 @@ namespace FamilySearchSample
             //Add a little separation after displaying headline.
             listBoxDisplayFacts.Items.Add(" ");
 
+            //Display Parents.
+            reportParentData(pPerson);
+
+            //Display Spouses.
+            reportSpouseData(pPerson);
+
+            //Display Children.
+            reportChildrenData(pPerson);
+        }
+
+        /// <summary>
+        /// Put all desired Parent info out on the form.
+        /// </summary>
+        /// <param name="pBasePerson">Original Person we are looking at.</param>
+        private void reportParentData(FamilyTreePersonState pBasePerson)
+        {
             //Get the parents.
-            myParents = pPerson.ReadParents();
+            PersonParentsState myParents = pBasePerson.ReadParents();
 
             //Look in myParents.Persons for parents, names, and dates.
             foreach (var parentFound in myParents.Persons ?? new List<Person>())
             {
                 //Display all Father Facts on the form.
-                displayAllFatherFacts(parentFound, pPerson);
+                displayAllFatherFacts(parentFound, pBasePerson);
 
                 //Display all Mother Facts on the form.
-                displayAllMotherFacts(parentFound, pPerson);
+                displayAllMotherFacts(parentFound, pBasePerson);
             }
+        }
+
+        /// <summary>
+        /// Put all desired Spouse info out on the form.
+        /// </summary>
+        /// <param name="pBasePerson">Original Person we are looking at.</param>
+        private void reportSpouseData(FamilyTreePersonState pBasePerson)
+        {
+            //Get the parents.
+            PersonSpousesState mySpouses = pBasePerson.ReadSpouses();
+
+            //Display a headline.
+            listBoxDisplayFacts.Items.Add("Spouse Facts");
+
+            //Look in mySpuses.Persons for Spouses.
+            foreach (var spouseFound in mySpouses.Persons ?? new List<Person>())
+            {
+                //Display all Spouse Facts on the form.
+                displayAllSpouseFacts(spouseFound);
+            }
+        }
+
+        /// <summary>
+        /// Put all desired Children info out on the form.
+        /// </summary>
+        /// <param name="pBasePerson">Original Person we are looking at.</param>
+        private void reportChildrenData(FamilyTreePersonState pBasePerson)
+        {
+            PersonChildrenState myChildren = pBasePerson.ReadChildren();
+
+            //Display a headline.
+            listBoxDisplayFacts.Items.Add("Children Facts");
+
+            //Look for Children.
+            foreach (var childFound in myChildren.Persons ?? new List<Person>())
+            {
+                //Display all Child Facts on the form.
+                displayAllChildFacts(childFound);
+            }
+        }
+
+        /// <summary>
+        /// Display Name, ID, Lifespan, Birthplace of spouse.
+        /// </summary>
+        /// <param name="pSpouse">Spouse to be displayed.</param>
+        private void displayAllSpouseFacts(Person pSpouse)
+        {
+            //Display Spouse data.
+            listBoxDisplayFacts.Items.Add(pSpouse.DisplayExtension.Name
+                + " ID: " + pSpouse.Id
+                + " Lifespan: " + pSpouse.DisplayExtension.Lifespan
+                + " Birthplace: " + pSpouse.DisplayExtension.BirthPlace);
+
+            //Add a little separation after displaying facts.
+            listBoxDisplayFacts.Items.Add(" ");
+        }
+
+        /// <summary>
+        /// Display Name, Gender, ID, Lifespan of child.
+        /// </summary>
+        /// <param name="pChild">Child to be displayed.</param>
+        private void displayAllChildFacts(Person pChild)
+        {
+            //Display Child Data.
+            listBoxDisplayFacts.Items.Add(pChild.DisplayExtension.Name
+                + " Gender: " + pChild.DisplayExtension.Gender
+                + " ID: " + pChild.Id
+                + " Lifespan: " + pChild.DisplayExtension.Lifespan);
+
+            //Add a little separation after displaying facts.
+            listBoxDisplayFacts.Items.Add(" ");
         }
 
         /// <summary>
@@ -214,6 +305,5 @@ namespace FamilySearchSample
                 listBoxDisplayFacts.Items.Add(aFact.KnownType.ToString());
             }
         }
-
     }
 }
