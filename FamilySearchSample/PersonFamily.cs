@@ -24,8 +24,8 @@ namespace FamilySearchSample
         {
             InitializeComponent();
 
-            //save ft (familytree object) for use in this form
-            //assumption: ft is initialized and ready to be used
+            //Save ft (familytree object) for use in this form.
+            //Assumption: ft is initialized and ready to be used.
             p_Ft = ft;
         }
 
@@ -48,23 +48,18 @@ namespace FamilySearchSample
             else
             {
                 //We actually do thomething. Remember cursor and change to wait-cursor.
-                var cursorState = this.Cursor;
-                this.Cursor = Cursors.WaitCursor;
+                var cursorState = Cursor;
+                Cursor = Cursors.WaitCursor;
 
                 //Copy ID to label. This way it is visible and saved.
                 lblPersonID.Text = txtPersonId.Text;
-
-                //First clear old results (if any)
-                HerbsTools.clearAllTextBoxes(this.Controls);
 
                 //Display person's data.
                 //Boolean result not needed at this point. Intended for future extensions.
                 bool displayResult = displayPersonsFamilyByID(lblPersonID.Text);
 
                 //Restore Cursor.
-                this.Cursor = cursorState;
-
-                //todo use displayResult for message lable, if you evaluate displayResult. 
+                Cursor = cursorState;
             }
         }
 

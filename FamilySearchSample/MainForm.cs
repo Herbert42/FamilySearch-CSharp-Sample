@@ -6,13 +6,13 @@ namespace FamilySearchSample
 {
     public partial class MainForm : Form
     {
-        //Family search tree
+        //Family search tree.
         FamilySearchFamilyTree ft;
 
-        //Use the Sandbox
+        //Use the Sandbox.
         bool useSandbox = true;
 
-        //Save Userinput-ID Password and developer Key as properties
+        //Save User ID, Password, and developer Key as properties.
         public string aUserID { get; set; }
         public string aPassword { get; set; }
         public string aDeveloperKey { get; set; }
@@ -26,18 +26,18 @@ namespace FamilySearchSample
         {
             using (var myform = new Authentication())
             {
-                //Show authentication dialog
+                //Show authentication dialog.
                 if (myform.ShowDialog() == DialogResult.OK)
                 {
-                    //Save values
+                    //Save values.
                     aUserID = myform.resultUserId;
                     aPassword = myform.resultPassword;
                     aDeveloperKey = myform.resultDeveloperKey;
 
-                    //Try to authenticate
+                    //Try to authenticate.
                     if (authenticateMe(aUserID, aPassword, aDeveloperKey))
                     {
-                        //Display access token
+                        //Display access token.
                         txtToken.Text = ft.CurrentAccessToken;
                     }
                 }
@@ -63,36 +63,35 @@ namespace FamilySearchSample
         /// <param name="pDeveloperKey">Developer Key from user input</param>
         private bool authenticateMe(string pUserID, string pPassword, string pDeveloperKey)
         {
-            //We start with Wait Cursor
+            //We start with Wait Cursor.
             Cursor.Current = Cursors.WaitCursor;
 
-            //initialize the Family Tree Objects
+            //Initialize the Family Tree Objects.
             ft = new FamilySearchFamilyTree(useSandbox);
 
             try
             {
-                //try to authenticate
+                //Try to authenticate.
                 ft.AuthenticateViaOAuth2Password(pUserID, pPassword, pDeveloperKey);
 
-                //switch on buttons
+                //Switch on buttons.
                 enableButtons();
 
-                //resture cursor
-                Cursor.Current = Cursors.Default;
-
-                //indicate success
+                //Indicate success.
                 return true;
             }
             catch (Exception myError)
             {
-                //Display Error Message
+                //Display Error Message.
                 txtToken.Text = "Error " + myError.Message.ToString();
 
-                //restore cursor
-                Cursor.Current = Cursors.Default;
-
-                //indicate authentication unsuccessful
+                //Indicate authentication unsuccessful.
                 return false;
+            }
+            finally
+            {
+                //Restore cursor.
+                Cursor.Current = Cursors.Default;
             }
         }
 
@@ -105,7 +104,7 @@ namespace FamilySearchSample
         {
             using (var myForm = new PersonById(ft))
             {
-                //dont care about return result at this point
+                //Dont care about return result at this point.
                 myForm.ShowDialog();
             }
         }
@@ -114,17 +113,16 @@ namespace FamilySearchSample
         {
             using (var myCurrentUserForm = new CurrentUser(ft))
             {
-                //We start with Wait Cursor
+                //We start with Wait Cursor.
                 Cursor.Current = Cursors.WaitCursor;
 
-                //See if we can collect and prepare data on form
+                //See if we can collect and prepare data on form.
                 if (myCurrentUserForm.prepareData())
                 {
-                    //Display Data. Dont care about return result at this point (again)
+                    //Display Data. Dont care about return result at this point (again).
                     myCurrentUserForm.ShowDialog();
                 }
-                //todo else give some feedback
-
+                
                 //Restore Cursor
                 Cursor.Current = Cursors.Default;
             }
@@ -134,7 +132,7 @@ namespace FamilySearchSample
         {
             using (var myReadPersonsFamilyForm = new PersonFamily(ft))
             {
-                //dont care about return result at this point
+                //Dont care about return result at this point.
                 myReadPersonsFamilyForm.ShowDialog();
             }
         }

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 
 namespace FamilySearchSample
 {
@@ -17,14 +12,14 @@ namespace FamilySearchSample
         {
             foreach (Control childObject in parentObject)
             {
-                //See if we have a textBox
+                //See if we have a textBox.
                 TextBox childTextBox = childObject as TextBox;
 
                 if (childTextBox != null)
-                    //TextBox found
+                    //TextBox found.
                     childTextBox.Clear();
                 else
-                    //Not a textBox, keep looking
+                    //Not a textBox, keep looking.
                     clearAllTextBoxes(childObject.Controls);
             }
         }

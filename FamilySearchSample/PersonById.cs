@@ -1,24 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using FamilySearch.Api.Ft;
-using Gx.Rs.Api;  
+using Gx.Rs.Api;
 
 
 namespace FamilySearchSample
 {
     public partial class PersonById : Form
     {
-
         public FamilySearchFamilyTree p_Ft { get; set; }
 
-        //Get a authenticated familytree as parameter
+        //Setup Form and save Familytree object.
         public PersonById(FamilySearchFamilyTree ft)
         {
             InitializeComponent();
@@ -72,17 +66,17 @@ namespace FamilySearchSample
             }
             catch (Exception myError)
             {
-                //Display error
+                //Display error.
                 lblErrorMessage.Text = myError.Message.ToString();
 
-                //Return false for failure
+                //Return false for failure.
                 return false;
             }
 
-            //Be on the safe side
+            //Be on the safe side.
             if (myPerson.Person != null)
             {
-                //Person found, display some info about Person
+                //Person found, display some info about Person.
                 txtGender.Text = myPerson.Person.DisplayExtension.Gender;
                 chkLiving.Checked = myPerson.Person.Living;
                 txtLivespan.Text = myPerson.Person.DisplayExtension.Lifespan;
@@ -93,18 +87,16 @@ namespace FamilySearchSample
                 txtFullName.Text = myPerson.Person.DisplayExtension.Name;
 
                 //Todo Clean this up
-                //Count of 1 is expected?, display for educational purpose
-                //lblErrorMessage.Text = "Count of Names: " + myPerson.Person.Names.Count;
+                //Count of 1 is expected?
 
-                //To avoid hard coded indices :
                 //Note: If more than one name, last name found is displayed. 
-                foreach (var name in myPerson.Person.Names)
+                foreach (var name in myPerson.Person.Names ?? new List<Gx.Conclusion.Name>())
                 {
                     //Display Lang
                     txtLang.Text = name.Lang;
 
                     //Display name parts
-                    foreach (var part in name.NameForm.Parts)
+                    foreach (var part in name.NameForm.Parts ?? new List<Gx.Conclusion.NamePart>())
                     {
                         if (part.KnownType == Gx.Types.NamePartType.Given)
                         {
@@ -117,20 +109,20 @@ namespace FamilySearchSample
                     }
                 }
 
-                //Try to find Birth under Facts
-                foreach (var myFact in myPerson.Person.Facts)
+                //Try to find Birth under Facts.
+                foreach (var myFact in myPerson.Person.Facts ?? new List<Gx.Conclusion.Fact>())
                 {
                     //Fact a Birth Fact?
                     if (myFact.KnownType == Gx.Types.FactType.Birth)
                     {
-                        //Birth info found, display it
+                        //Birth info found, display it.
                         txtDateOriginal.Text = myFact.Date.Original;
                         txtDateFormal.Text = myFact.Date.Formal;
 
-                        //Make sure List is not empty
+                        //Make sure List is not empty.
                         if (myFact.Date.NormalizedExtensions.Any())
                         {
-                            //Hack Vorsicht: hard coded
+                            //Hack Vorsicht: hard coded.
                             txtDateNormalized.Text = myFact.Date.NormalizedExtensions[0].Value;
                         }
                     }
@@ -138,11 +130,11 @@ namespace FamilySearchSample
             }
             else
             {
-                //No peron found return false for failure
+                //No peron found return false for failure.
                 return false;
             }
-            //We are done: success
+            //We are done: success.
             return true;
-        } 
+        }
     }
 }
