@@ -9,3 +9,13 @@ This project is in active development and by no means ready to show off at this 
 
 You will not need to type in your App-Key in a real world application, it would be in you code. I just want to protect my own key. <i class=" icon-meh"></i>
 Have a look at https://familysearch.org/Developer/ to get started and read through https://familysearch.org/developers/docs/api/authentication/Access_Token_resource concerning the **Password grant type**.
+
+At this point the following forms are functional and in a presentable state:
+ >- Authenticate
+ >- Find Person by Id
+ >- Current User
+ >- Read Person's Family
+ 
+Still to come:
+ >- Read Person's Ancestry
+ >- Person Search
