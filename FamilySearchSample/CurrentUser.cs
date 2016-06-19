@@ -12,7 +12,7 @@ namespace FamilySearchSample
     public partial class CurrentUser : Form
     {
         //Provide FamilyTree object as property.
-        public FamilySearchFamilyTree p_Ft { get; set; }
+        private FamilySearchFamilyTree p_Ft { get; set; }
 
         //Setup Form and save Familytree object.
         public CurrentUser(FamilySearchFamilyTree ft)
@@ -109,7 +109,7 @@ namespace FamilySearchSample
             }
             else
             {
-                //No peron found, return false for failure.
+                //No person found, return false for failure.
                 return false;
             }
 
@@ -122,7 +122,7 @@ namespace FamilySearchSample
         /// Entry Point before form is displayed.
         /// </summary>
         /// <returns>true if successful, false otherwise.</returns>
-        public bool prepareData()
+        public bool PrepareData()
         {
             //Define local helper variable.
             UserState myUser;
@@ -140,14 +140,14 @@ namespace FamilySearchSample
 
             //Write ID from user profile to label.
             lblUserID.Text = myUser.User.PersonId;
-
+                                          
             //Clear old results (if any).
-            HerbsTools.clearAllTextBoxes(Controls);
+            HerbsTools.ClearAllTextBoxes(Controls);
 
             //Display person's data.
             //bool result not needed at this point. Intended for future extensions.
             bool displayResult = displayPersonByIdData(lblUserID.Text);
-
+            
             //Report: action was unsuccessful.
             return true;
         }

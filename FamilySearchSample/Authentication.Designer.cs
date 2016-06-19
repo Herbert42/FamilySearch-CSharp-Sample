@@ -1,6 +1,6 @@
 ﻿namespace FamilySearchSample
 {
-    partial class Authentication
+    partial class UserAuthentication
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Authentication));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UserAuthentication));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -129,7 +129,7 @@
             this.textBox1.TabIndex = 9;
             this.textBox1.Text = resources.GetString("textBox1.Text");
             // 
-            // Authentication
+            // UserAuthentication
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -146,8 +146,8 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Name = "Authentication";
-            this.Text = "Authentication";
+            this.Name = "UserAuthentication";
+            this.Text = "User Authentication";
             this.ResumeLayout(false);
             this.PerformLayout();
 

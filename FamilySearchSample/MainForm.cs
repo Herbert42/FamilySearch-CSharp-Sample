@@ -13,9 +13,9 @@ namespace FamilySearchSample
         bool useSandbox = true;
 
         //Save User ID, Password, and developer Key as properties.
-        public string aUserID { get; set; }
-        public string aPassword { get; set; }
-        public string aDeveloperKey { get; set; }
+        public string MyUserId { get; set; }
+        public string MyPassword { get; set; }
+        public string MyDeveloperKey { get; set; }
 
         public MainForm()
         {
@@ -24,18 +24,18 @@ namespace FamilySearchSample
 
         private void btnAuthenticate_Click(object sender, EventArgs e)
         {
-            using (var myform = new Authentication())
+            using (var myform = new UserAuthentication())
             {
                 //Show authentication dialog.
                 if (myform.ShowDialog() == DialogResult.OK)
                 {
                     //Save values.
-                    aUserID = myform.resultUserId;
-                    aPassword = myform.resultPassword;
-                    aDeveloperKey = myform.resultDeveloperKey;
+                    MyUserId = myform.ResultUserId;
+                    MyPassword = myform.ResultPassword;
+                    MyDeveloperKey = myform.ResultDeveloperKey;
 
                     //Try to authenticate.
-                    if (authenticateMe(aUserID, aPassword, aDeveloperKey))
+                    if (authenticateMe(MyUserId, MyPassword, MyDeveloperKey))
                     {
                         //Display access token.
                         txtToken.Text = ft.CurrentAccessToken;
@@ -47,11 +47,12 @@ namespace FamilySearchSample
         /// <summary>
         /// Enable Buttons, normally done after successful authentication.
         /// </summary>
-        public void enableButtons()
+        public void EnableButtons()
         {
             btnFindById.Enabled = true;
             btnCurrentUser.Enabled = true;
             btnReadPersonFamily.Enabled = true;
+            btnPersonSearch.Enabled = true;
         }
 
         /// <summary>
@@ -75,7 +76,7 @@ namespace FamilySearchSample
                 ft.AuthenticateViaOAuth2Password(pUserID, pPassword, pDeveloperKey);
 
                 //Switch on buttons.
-                enableButtons();
+                EnableButtons();
 
                 //Indicate success.
                 return true;
@@ -104,7 +105,7 @@ namespace FamilySearchSample
         {
             using (var myForm = new PersonById(ft))
             {
-                //Dont care about return result at this point.
+                //Don't care about return result at this point.
                 myForm.ShowDialog();
             }
         }
@@ -117,12 +118,12 @@ namespace FamilySearchSample
                 Cursor.Current = Cursors.WaitCursor;
 
                 //See if we can collect and prepare data on form.
-                if (myCurrentUserForm.prepareData())
+                if (myCurrentUserForm.PrepareData())
                 {
                     //Display Data. Dont care about return result at this point (again).
                     myCurrentUserForm.ShowDialog();
                 }
-                
+
                 //Restore Cursor
                 Cursor.Current = Cursors.Default;
             }
@@ -132,8 +133,17 @@ namespace FamilySearchSample
         {
             using (var myReadPersonsFamilyForm = new PersonFamily(ft))
             {
-                //Dont care about return result at this point.
+                //Don't care about return result at this point.
                 myReadPersonsFamilyForm.ShowDialog();
+            }
+        }
+
+        private void btnPersonSearch_Click(object sender, EventArgs e)
+        {
+            using (var myPersonSearchForm = new PersonSearch(ft))
+            {                       
+                //Again, don't care about return result at this point.
+                myPersonSearchForm.ShowDialog();
             }
         }
     }

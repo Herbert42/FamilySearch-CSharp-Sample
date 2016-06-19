@@ -78,9 +78,9 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(8, 15);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(184, 13);
+            this.label2.Size = new System.Drawing.Size(190, 13);
             this.label2.TabIndex = 2;
-            this.label2.Text = "Enter Person ID, then press \"Retrive\"";
+            this.label2.Text = "Enter Person ID, then press \"Retrieve\"";
             // 
             // btnRetriveById
             // 
@@ -198,7 +198,7 @@
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(58, 13);
             this.label5.TabIndex = 15;
-            this.label5.Text = "Bitrh Place";
+            this.label5.Text = "Birth Place";
             // 
             // txtDeathDate
             // 
@@ -424,7 +424,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtPersonId);
             this.Name = "PersonById";
-            this.Text = "PersonById";
+            this.Text = "Person by Id";
             this.ResumeLayout(false);
             this.PerformLayout();
 

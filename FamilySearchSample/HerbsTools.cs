@@ -8,7 +8,7 @@ namespace FamilySearchSample
         /// Recursively clear Text in all textboxes, regardless where they are on the form.
         /// </summary>
         /// <param name="parentObject">Collection of controls</param>
-        public static void clearAllTextBoxes(Control.ControlCollection parentObject)
+        public static void ClearAllTextBoxes(Control.ControlCollection parentObject)
         {
             foreach (Control childObject in parentObject)
             {
@@ -20,7 +20,7 @@ namespace FamilySearchSample
                     childTextBox.Clear();
                 else
                     //Not a textBox, keep looking.
-                    clearAllTextBoxes(childObject.Controls);
+                    ClearAllTextBoxes(childObject.Controls);
             }
         }
     }

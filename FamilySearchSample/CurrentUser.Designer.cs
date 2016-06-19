@@ -169,7 +169,7 @@
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(58, 13);
             this.label5.TabIndex = 15;
-            this.label5.Text = "Bitrh Place";
+            this.label5.Text = "Birth Place";
             // 
             // txtDeathDate
             // 
@@ -392,7 +392,7 @@
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.btnCancel);
             this.Name = "CurrentUser";
-            this.Text = "CurrentUser";
+            this.Text = "Current User";
             this.ResumeLayout(false);
             this.PerformLayout();
 

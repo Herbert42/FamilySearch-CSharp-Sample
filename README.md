@@ -15,7 +15,8 @@ At this point the following forms are functional and in a presentable state:
  >- Find Person by Id
  >- Current User
  >- Read Person's Family
+ >- Person Search
  
 Still to come:
  >- Read Person's Ancestry
- >- Person Search
+ 

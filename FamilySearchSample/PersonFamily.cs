@@ -14,7 +14,7 @@ namespace FamilySearchSample
         /// <summary>
         /// FamilyTree Object to be used in this form.
         /// </summary>
-        public FamilySearchFamilyTree p_Ft { get; set; }
+        private FamilySearchFamilyTree p_Ft { get; set; }
 
         /// <summary>
         /// Initialize PersonFamily form.
@@ -41,13 +41,13 @@ namespace FamilySearchSample
             lblErrorMessage.Text = "No current message.";
 
             //Try to display person info.
-            if (txtPersonId.Text == "")
+            if (string.IsNullOrEmpty(txtPersonId.Text))
             {
                 lblErrorMessage.Text = "Please enter a Person ID.";
             }
             else
             {
-                //We actually do thomething. Remember cursor and change to wait-cursor.
+                //We actually do something. Remember cursor and change to wait-cursor.
                 var cursorState = Cursor;
                 Cursor = Cursors.WaitCursor;
 

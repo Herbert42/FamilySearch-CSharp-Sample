@@ -55,9 +55,9 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(12, 9);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(184, 13);
+            this.label2.Size = new System.Drawing.Size(190, 13);
             this.label2.TabIndex = 5;
-            this.label2.Text = "Enter Person ID, then press \"Retrive\"";
+            this.label2.Text = "Enter Person ID, then press \"Retrieve\"";
             // 
             // txtPersonId
             // 
@@ -130,7 +130,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtPersonId);
             this.Name = "PersonFamily";
-            this.Text = "PersonFamily";
+            this.Text = "Person Family";
             this.ResumeLayout(false);
             this.PerformLayout();
 

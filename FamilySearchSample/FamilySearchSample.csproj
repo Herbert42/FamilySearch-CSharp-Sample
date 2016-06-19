@@ -24,6 +24,8 @@
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>
     </DocumentationFile>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+    <CodeAnalysisRuleSet>FamilySearchSample.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -33,6 +35,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>FamilySearchSample.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="FamilySearch.API.SDK, Version=1.0.5422.31549, Culture=neutral, processorArchitecture=MSIL">
@@ -125,6 +128,13 @@
     <Compile Include="CurrentUser.Designer.cs">
       <DependentUpon>CurrentUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="PersonSearch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PersonSearch.Designer.cs">
+      <DependentUpon>PersonSearch.cs</DependentUpon>
+    </Compile>
     <Compile Include="HerbsTools.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -152,6 +162,9 @@
     <EmbeddedResource Include="CurrentUser.resx">
       <DependentUpon>CurrentUser.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PersonSearch.resx">
+      <DependentUpon>PersonSearch.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -170,6 +183,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="FamilySearchSample.ruleset" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

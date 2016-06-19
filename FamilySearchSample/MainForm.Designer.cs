@@ -39,6 +39,7 @@
             this.btnCurrentUser = new System.Windows.Forms.Button();
             this.btnReadPersonFamily = new System.Windows.Forms.Button();
             this.toolTipMainForm = new System.Windows.Forms.ToolTip(this.components);
+            this.btnPersonSearch = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -137,12 +138,24 @@
             this.toolTipMainForm.IsBalloon = true;
             this.toolTipMainForm.ReshowDelay = 100;
             // 
+            // btnPersonSearch
+            // 
+            this.btnPersonSearch.Enabled = false;
+            this.btnPersonSearch.Location = new System.Drawing.Point(12, 191);
+            this.btnPersonSearch.Name = "btnPersonSearch";
+            this.btnPersonSearch.Size = new System.Drawing.Size(167, 30);
+            this.btnPersonSearch.TabIndex = 9;
+            this.btnPersonSearch.Text = "Person Search";
+            this.btnPersonSearch.UseVisualStyleBackColor = true;
+            this.btnPersonSearch.Click += new System.EventHandler(this.btnPersonSearch_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Bisque;
             this.ClientSize = new System.Drawing.Size(696, 360);
+            this.Controls.Add(this.btnPersonSearch);
             this.Controls.Add(this.btnReadPersonFamily);
             this.Controls.Add(this.btnCurrentUser);
             this.Controls.Add(this.btnFindById);
@@ -171,6 +184,7 @@
         private System.Windows.Forms.Button btnCurrentUser;
         private System.Windows.Forms.Button btnReadPersonFamily;
         private System.Windows.Forms.ToolTip toolTipMainForm;
+        private System.Windows.Forms.Button btnPersonSearch;
     }
 }
 
