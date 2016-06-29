@@ -5,11 +5,13 @@ using System.Windows.Forms;
 using FamilySearch.Api.Ft;
 using Gx.Rs.Api;
 
-
 namespace FamilySearchSample
 {
     public partial class PersonById : Form
     {
+        /// <summary>
+        /// FamilyTree Object to be used in this form.
+        /// </summary>
         private FamilySearchFamilyTree p_Ft { get; set; }
 
         //Setup Form and save Familytree object.

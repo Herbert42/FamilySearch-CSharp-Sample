@@ -146,5 +146,14 @@ namespace FamilySearchSample
                 myPersonSearchForm.ShowDialog();
             }
         }
+
+        private void btnPersonAncestry_Click(object sender, EventArgs e)
+        {
+            using (var myPersonAncestrySearchForm = new frmPersonAncestry(ft))
+            {
+                //Again, don't care about return result at this point.
+                myPersonAncestrySearchForm.ShowDialog();
+            }
+        }
     }
 }

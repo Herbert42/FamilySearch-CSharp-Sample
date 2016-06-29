@@ -40,6 +40,7 @@
             this.btnReadPersonFamily = new System.Windows.Forms.Button();
             this.toolTipMainForm = new System.Windows.Forms.ToolTip(this.components);
             this.btnPersonSearch = new System.Windows.Forms.Button();
+            this.btnPersonAncestry = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -101,7 +102,7 @@
             // btnFindById
             // 
             this.btnFindById.Enabled = false;
-            this.btnFindById.Location = new System.Drawing.Point(13, 83);
+            this.btnFindById.Location = new System.Drawing.Point(12, 83);
             this.btnFindById.Name = "btnFindById";
             this.btnFindById.Size = new System.Drawing.Size(167, 30);
             this.btnFindById.TabIndex = 6;
@@ -112,7 +113,7 @@
             // btnCurrentUser
             // 
             this.btnCurrentUser.Enabled = false;
-            this.btnCurrentUser.Location = new System.Drawing.Point(13, 119);
+            this.btnCurrentUser.Location = new System.Drawing.Point(12, 119);
             this.btnCurrentUser.Name = "btnCurrentUser";
             this.btnCurrentUser.Size = new System.Drawing.Size(167, 30);
             this.btnCurrentUser.TabIndex = 7;
@@ -123,7 +124,7 @@
             // btnReadPersonFamily
             // 
             this.btnReadPersonFamily.Enabled = false;
-            this.btnReadPersonFamily.Location = new System.Drawing.Point(13, 155);
+            this.btnReadPersonFamily.Location = new System.Drawing.Point(12, 155);
             this.btnReadPersonFamily.Name = "btnReadPersonFamily";
             this.btnReadPersonFamily.Size = new System.Drawing.Size(167, 30);
             this.btnReadPersonFamily.TabIndex = 8;
@@ -149,12 +150,24 @@
             this.btnPersonSearch.UseVisualStyleBackColor = true;
             this.btnPersonSearch.Click += new System.EventHandler(this.btnPersonSearch_Click);
             // 
+            // btnPersonAncestry
+            // 
+            this.btnPersonAncestry.Enabled = false;
+            this.btnPersonAncestry.Location = new System.Drawing.Point(12, 227);
+            this.btnPersonAncestry.Name = "btnPersonAncestry";
+            this.btnPersonAncestry.Size = new System.Drawing.Size(167, 30);
+            this.btnPersonAncestry.TabIndex = 10;
+            this.btnPersonAncestry.Text = "Person\'s Ancestry";
+            this.btnPersonAncestry.UseVisualStyleBackColor = true;
+            this.btnPersonAncestry.Click += new System.EventHandler(this.btnPersonAncestry_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Bisque;
             this.ClientSize = new System.Drawing.Size(696, 360);
+            this.Controls.Add(this.btnPersonAncestry);
             this.Controls.Add(this.btnPersonSearch);
             this.Controls.Add(this.btnReadPersonFamily);
             this.Controls.Add(this.btnCurrentUser);
@@ -185,6 +198,7 @@
         private System.Windows.Forms.Button btnReadPersonFamily;
         private System.Windows.Forms.ToolTip toolTipMainForm;
         private System.Windows.Forms.Button btnPersonSearch;
+        private System.Windows.Forms.Button btnPersonAncestry;
     }
 }
 

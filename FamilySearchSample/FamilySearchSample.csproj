@@ -129,6 +129,12 @@
       <DependentUpon>CurrentUser.cs</DependentUpon>
     </Compile>
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="PersonAncestry.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PersonAncestry.Designer.cs">
+      <DependentUpon>PersonAncestry.cs</DependentUpon>
+    </Compile>
     <Compile Include="PersonSearch.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -161,6 +167,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CurrentUser.resx">
       <DependentUpon>CurrentUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PersonAncestry.resx">
+      <DependentUpon>PersonAncestry.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PersonSearch.resx">
       <DependentUpon>PersonSearch.cs</DependentUpon>

@@ -39,7 +39,7 @@ namespace FamilySearchSample
                 GedcomxPersonSearchQueryBuilder query = new GedcomxPersonSearchQueryBuilder()
 
                 //Set all on the form available Parameter for query.
-                //Note: This is just a sample of available Parameters'
+                //Note: This is just a sample of available Parameters.
                 .GivenName(txtGivenName.Text)
                 .Surname(txtSurname.Text)
                 .BirthDate(txtBirthDate.Text)
