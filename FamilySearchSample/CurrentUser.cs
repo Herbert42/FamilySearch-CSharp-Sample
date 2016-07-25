@@ -6,7 +6,6 @@ using FamilySearch.Api;
 using FamilySearch.Api.Ft;
 using Gx.Rs.Api;
 
-
 namespace FamilySearchSample
 {
     public partial class CurrentUser : Form
@@ -58,54 +57,13 @@ namespace FamilySearchSample
             if (myPerson.Person != null)
             {
                 //Person found, display some info about Person.
-                txtGender.Text = myPerson.Person.DisplayExtension.Gender;
-                chkLiving.Checked = myPerson.Person.Living;
-                txtLivespan.Text = myPerson.Person.DisplayExtension.Lifespan;
-                txtBirthDate.Text = myPerson.Person.DisplayExtension.BirthDate;
-                txtBirthPlace.Text = myPerson.Person.DisplayExtension.BirthPlace;
-                txtDeathDate.Text = myPerson.Person.DisplayExtension.DeathDate;
-                txtDeathPlace.Text = myPerson.Person.DisplayExtension.DeathPlace;
-                txtFullName.Text = myPerson.Person.DisplayExtension.Name;
+                DisplayExtensionData(myPerson);
 
-                //Count of 1 is expected?
-                //Note: If more than one name, last name found is displayed. 
-                foreach (var name in myPerson.Person.Names ?? new List<Gx.Conclusion.Name>())
-                {
-                    //Display Lang.
-                    txtLang.Text = name.Lang;
+                //Display name parts of person.
+                DisplayNameParts(myPerson);
 
-                    //Display name parts.
-                    foreach (var part in name.NameForm.Parts ?? new List<Gx.Conclusion.NamePart>())
-                    {
-                        if (part.KnownType == Gx.Types.NamePartType.Given)
-                        {
-                            txtGivenName.Text = part.Value;
-                        }
-                        if (part.KnownType == Gx.Types.NamePartType.Surname)
-                        {
-                            txtSurname.Text = part.Value;
-                        }
-                    }
-                }
-
-                //Try to find Birth under Facts
-                foreach (var myFact in myPerson.Person.Facts ?? new List<Gx.Conclusion.Fact>())
-                {
-                    // Fact a Birth Fact?
-                    if (myFact.KnownType == Gx.Types.FactType.Birth)
-                    {
-                        //Birth info found, display it.
-                        txtDateOriginal.Text = myFact.Date.Original;
-                        txtDateFormal.Text = myFact.Date.Formal;
-
-                        //Make sure List is not empty.
-                        if (myFact.Date.NormalizedExtensions.Any())
-                        {
-                            //Hack Vorsicht: hard coded
-                            txtDateNormalized.Text = myFact.Date.NormalizedExtensions[0].Value;
-                        }
-                    }
-                }
+                //Display person's Birth facts.
+                DisplayBirthFacts(myPerson);
             }
             else
             {
@@ -113,8 +71,78 @@ namespace FamilySearchSample
                 return false;
             }
 
-            //We are done: success
+            //We are done: success.
             return true;
+        }
+
+        /// <summary>
+        /// Display Person's Display Extensions.
+        /// </summary>
+        /// <param name="displayPerson">Person to be displayed.</param>
+        private void DisplayExtensionData(PersonState displayPerson)
+        {
+            //Display selected Info about person.
+            txtGender.Text = displayPerson.Person.DisplayExtension.Gender;
+            chkLiving.Checked = displayPerson.Person.Living;
+            txtLivespan.Text = displayPerson.Person.DisplayExtension.Lifespan;
+            txtBirthDate.Text = displayPerson.Person.DisplayExtension.BirthDate;
+            txtBirthPlace.Text = displayPerson.Person.DisplayExtension.BirthPlace;
+            txtDeathDate.Text = displayPerson.Person.DisplayExtension.DeathDate;
+            txtDeathPlace.Text = displayPerson.Person.DisplayExtension.DeathPlace;
+            txtFullName.Text = displayPerson.Person.DisplayExtension.Name;
+        }
+
+        /// <summary>
+        /// Display Person's Name Parts.
+        /// </summary>
+        /// <param name="displayPerson">Person to be displayed.</param>
+        private void DisplayNameParts(PersonState displayPerson)
+        {
+            //Note: If more than one name, last name found is displayed. 
+            foreach (var name in displayPerson.Person.Names ?? new List<Gx.Conclusion.Name>())
+            {
+                //Display Lang
+                txtLang.Text = name.Lang;
+
+                //Display name parts
+                foreach (var part in name.NameForm.Parts ?? new List<Gx.Conclusion.NamePart>())
+                {
+                    if (part.KnownType == Gx.Types.NamePartType.Given)
+                    {
+                        txtGivenName.Text = part.Value;
+                    }
+                    if (part.KnownType == Gx.Types.NamePartType.Surname)
+                    {
+                        txtSurname.Text = part.Value;
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Display person's birth facts.
+        /// </summary>
+        /// <param name="displayPerson">Person to be displayed.</param>
+        private void DisplayBirthFacts(PersonState displayPerson)
+        {
+            //Try to find Birth under Facts.
+            foreach (var myFact in displayPerson.Person.Facts ?? new List<Gx.Conclusion.Fact>())
+            {
+                //Fact a Birth Fact?
+                if (myFact.KnownType == Gx.Types.FactType.Birth)
+                {
+                    //Birth info found, display it.
+                    txtDateOriginal.Text = myFact.Date.Original;
+                    txtDateFormal.Text = myFact.Date.Formal;
+
+                    //Make sure List is not empty.
+                    if (myFact.Date.NormalizedExtensions.Any())
+                    {
+                        //Hack Vorsicht: hard coded.
+                        txtDateNormalized.Text = myFact.Date.NormalizedExtensions[0].Value;
+                    }
+                }
+            }
         }
 
         /// <summary>
@@ -140,14 +168,14 @@ namespace FamilySearchSample
 
             //Write ID from user profile to label.
             lblUserID.Text = myUser.User.PersonId;
-                                          
+
             //Clear old results (if any).
             HerbsTools.ClearAllTextBoxes(Controls);
 
             //Display person's data.
             //bool result not needed at this point. Intended for future extensions.
             bool displayResult = displayPersonByIdData(lblUserID.Text);
-            
+
             //Report: action was unsuccessful.
             return true;
         }

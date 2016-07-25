@@ -59,7 +59,7 @@
             // lblErrorMessage
             // 
             this.lblErrorMessage.AutoSize = true;
-            this.lblErrorMessage.Location = new System.Drawing.Point(418, 13);
+            this.lblErrorMessage.Location = new System.Drawing.Point(334, 43);
             this.lblErrorMessage.Name = "lblErrorMessage";
             this.lblErrorMessage.Size = new System.Drawing.Size(105, 13);
             this.lblErrorMessage.TabIndex = 50;
@@ -73,6 +73,7 @@
             this.btnOK.TabIndex = 49;
             this.btnOK.Text = "OK";
             this.btnOK.UseVisualStyleBackColor = true;
+            this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
             // 
             // btnCancel
             // 
@@ -92,6 +93,7 @@
             this.btnReadPersonAncestry.TabIndex = 47;
             this.btnReadPersonAncestry.Text = "Retrieve";
             this.btnReadPersonAncestry.UseVisualStyleBackColor = true;
+            this.btnReadPersonAncestry.Click += new System.EventHandler(this.btnReadPersonAncestry_Click);
             // 
             // label2
             // 
@@ -114,7 +116,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(547, 371);
+            this.ClientSize = new System.Drawing.Size(574, 371);
             this.Controls.Add(this.listBoxDisplayAncestry);
             this.Controls.Add(this.lblPersonID);
             this.Controls.Add(this.lblErrorMessage);

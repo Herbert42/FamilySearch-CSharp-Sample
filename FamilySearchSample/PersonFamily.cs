@@ -51,6 +51,7 @@ namespace FamilySearchSample
                 var cursorState = Cursor;
                 Cursor = Cursors.WaitCursor;
 
+                //ToDo remove this
                 //Copy ID to label. This way it is visible and saved.
                 lblPersonID.Text = txtPersonId.Text;
 
@@ -107,7 +108,7 @@ namespace FamilySearchSample
         /// <param name="pPerson">Person whose family is to be displayed</param>
         private void showFamilyFacts(FamilyTreePersonState pPerson)
         {
-            //Get a headline out.
+            //Get a headline out including empty line.
             listBoxDisplayFacts.Items.Add("Family Facts for " + pPerson.Person.Id
                 + " (" + pPerson.Person.DisplayExtension.Name + ")"
                 + " Lifespan " + pPerson.Person.DisplayExtension.Lifespan);

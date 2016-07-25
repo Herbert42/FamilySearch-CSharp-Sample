@@ -53,6 +53,7 @@ namespace FamilySearchSample
             btnCurrentUser.Enabled = true;
             btnReadPersonFamily.Enabled = true;
             btnPersonSearch.Enabled = true;
+            btnPersonAncestry.Enabled = true;
         }
 
         /// <summary>

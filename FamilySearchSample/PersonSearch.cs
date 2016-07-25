@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 using FamilySearch.Api.Ft;
 using Gx.Atom;
@@ -32,7 +33,7 @@ namespace FamilySearchSample
 
             //Hack Vorsicht hard coded.
             lblErrorMessage.Text = "No Error.";
-             
+
             try
             {
                 //Put together a search query.
@@ -49,13 +50,13 @@ namespace FamilySearchSample
                 .MotherGivenName(txtMotherGivenName.Text)
                 .MotherSurname(txtMotherSurname.Text)
                 .MotherBirthDate(txtMotherBirthDate.Text);
-                       
+
                 //Search the collection.
                 PersonSearchResultsState resultsSearchPersons = FamilyTree.SearchForPersons(query);
 
                 //Show results on Form.
                 DisplayPersonSearchResults(resultsSearchPersons);
-                 
+
             }
             catch (Exception myError)
             {
@@ -81,16 +82,26 @@ namespace FamilySearchSample
             //Clear ResultBox.
             ResultBox.Items.Clear();
 
+            //See remark (1) at the bottom of this file.
+
             //Search through the result list.
             foreach (Entry singleEntry in searchResults.Results.Entries ?? new List<Entry>())
             {
-                //Get a person
+                //Get a person.
                 person = searchResults.ReadPerson(singleEntry);
 
-                //Display some person info
-                ResultBox.Items.Add(person.Person.DisplayExtension.Name + " "
-                    + person.Person.Id);
-
+                //Person could be null, it does happen.
+                if (person.Person != null)
+                {
+                    //Display some person info.
+                    ResultBox.Items.Add(person.Person.DisplayExtension.Name + " "
+                        + person.Person.Id);
+                }
+                else
+                {   
+                    //Show off the rare occasion of a null person.
+                    ResultBox.Items.Add("null");
+                }
                 //Display it right away, we are inpatient.
                 ResultBox.Update();
             }
@@ -103,3 +114,19 @@ namespace FamilySearchSample
         }
     }
 }
+
+//Remark (1)
+//Alternative code:
+//The following code works at (1), but is slower. The foreach loop saves ca. 40% of the querry time. 
+//var personQuerry = from singleEntry in searchResults.Results.Entries
+//                    where searchResults.ReadPerson(singleEntry).Person != null
+//                    select searchResults.ReadPerson(singleEntry).Person;
+
+// foreach (var foundPerson in personQuerry)
+// {
+//     //Display some person info.
+//     ResultBox.Items.Add(foundPerson.DisplayExtension.Name + " "
+//         + foundPerson.Id);
+//     //Display it right away, we are inpatient.
+//     ResultBox.Update();
+// }

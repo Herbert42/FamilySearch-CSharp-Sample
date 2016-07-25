@@ -96,7 +96,7 @@ namespace FamilySearchSample
             }
             else
             {
-                //No peron found return false for failure.
+                //No person found return false for failure.
                 return false;
             }
             //We are done: success.
