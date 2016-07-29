@@ -150,7 +150,7 @@ namespace FamilySearchSample
 
         private void btnPersonAncestry_Click(object sender, EventArgs e)
         {
-            using (var myPersonAncestrySearchForm = new frmPersonAncestry(ft))
+            using (var myPersonAncestrySearchForm = new PersonAncestry(ft))
             {
                 //Again, don't care about return result at this point.
                 myPersonAncestrySearchForm.ShowDialog();

@@ -8,20 +8,20 @@ using Gx.Rs.Api.Util;
 
 namespace FamilySearchSample
 {
-    public partial class frmPersonAncestry : Form
+    public partial class PersonAncestry : Form
     {
         /// <summary>
         /// FamilyTree Object to be used in this form.
         /// </summary>
-        private FamilySearchFamilyTree p_Ft { get; set; }
+        private FamilySearchFamilyTree FamilyTree { get; set; }
 
-        public frmPersonAncestry(FamilySearchFamilyTree ft)
+        public PersonAncestry(FamilySearchFamilyTree originalFamilyTree)
         {
             InitializeComponent();
 
-            //Save ft (familytree object) for use in this form
-            //Assumption: ft is initialized and ready to be used
-            p_Ft = ft;
+            //Save originalFamilyTree for use in this form
+            //Assumption: originalFamilyTree is initialized and ready to be used
+            FamilyTree = originalFamilyTree;
         }
 
         private void btnReadPersonAncestry_Click(object sender, System.EventArgs e)
@@ -66,7 +66,7 @@ namespace FamilySearchSample
             try
             {  
                 //Get Target Person.
-                myPerson = p_Ft.ReadPersonById(personID);
+                myPerson = FamilyTree.ReadPersonById(personID);
 
                 //Read that person's ancestry.
                 myAncestry = myPerson.ReadAncestry(QueryParameter.Generations(countOfGenerations));

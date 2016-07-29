@@ -4,4 +4,13 @@
   <Include Path="basicdesignguidelinerules.ruleset" Action="Default" />
   <Include Path="extendedcorrectnessrules.ruleset" Action="Default" />
   <Include Path="extendeddesignguidelinerules.ruleset" Action="Default" />
+  <Rules AnalyzerId="Microsoft.Analyzers.ManagedCodeAnalysis" RuleNamespace="Microsoft.Rules.Managed">
+    <Rule Id="CA1303" Action="None" />
+    <Rule Id="CA1800" Action="Warning" />
+    <Rule Id="CA1802" Action="Warning" />
+  </Rules>
+  <Rules AnalyzerId="Microsoft.CodeAnalysis.CSharp.EditorFeatures" RuleNamespace="Microsoft.CodeAnalysis.CSharp.EditorFeatures">
+    <Rule Id="UseAutoProperty" Action="Warning" />
+    <Rule Id="UseAutoPropertyFadedToken" Action="Warning" />
+  </Rules>
 </RuleSet>

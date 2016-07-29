@@ -11,16 +11,16 @@ namespace FamilySearchSample
     public partial class CurrentUser : Form
     {
         //Provide FamilyTree object as property.
-        private FamilySearchFamilyTree p_Ft { get; set; }
+        private FamilySearchFamilyTree FamilyTree { get; set; }
 
         //Setup Form and save Familytree object.
-        public CurrentUser(FamilySearchFamilyTree ft)
+        public CurrentUser(FamilySearchFamilyTree originalFamilyTree)
         {
             InitializeComponent();
 
-            //Save ft (familytree object) for use in this form.
-            //Assumption: ft is initialized and ready to be used.
-            p_Ft = ft;
+            //Save originalFamilyTree for use in this form.
+            //Assumption: originalFamilyTree is initialized and ready to be used.
+            FamilyTree = originalFamilyTree;
         }
 
         private void btnOK_Click(object sender, EventArgs e)
@@ -42,7 +42,7 @@ namespace FamilySearchSample
             try
             {
                 //Try to read Person by ID.
-                myPerson = p_Ft.ReadPersonById(personID);
+                myPerson = FamilyTree.ReadPersonById(personID);
             }
             catch (Exception myError)
             {
@@ -158,7 +158,7 @@ namespace FamilySearchSample
             try
             {
                 //Get current user.
-                myUser = p_Ft.ReadCurrentUser();
+                myUser = FamilyTree.ReadCurrentUser();
             }
             catch
             {

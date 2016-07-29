@@ -1,6 +1,6 @@
 ﻿namespace FamilySearchSample
 {
-    partial class frmPersonAncestry
+    partial class PersonAncestry
     {
         /// <summary>
         /// Required designer variable.
@@ -111,7 +111,7 @@
             this.txtPersonId.Size = new System.Drawing.Size(100, 20);
             this.txtPersonId.TabIndex = 45;
             // 
-            // frmPersonAncestry
+            // PersonAncestry
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -125,7 +125,7 @@
             this.Controls.Add(this.btnReadPersonAncestry);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtPersonId);
-            this.Name = "frmPersonAncestry";
+            this.Name = "PersonAncestry";
             this.Text = "Person\'s Ancestry";
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -16,13 +16,13 @@ namespace FamilySearchSample
         /// </summary>
         private FamilySearchFamilyTree FamilyTree { get; set; }
 
-        public PersonSearch(FamilySearchFamilyTree ft)
+        public PersonSearch(FamilySearchFamilyTree originalFamilyTree)
         {
             InitializeComponent();
 
-            //Save ft (familytree object) for use in this form.
-            //Assumption: ft is initialized and ready to be used.
-            FamilyTree = ft;
+            //Save originalFamilyTree for use in this form.
+            //Assumption: originalFamilyTree is initialized and ready to be used.
+            FamilyTree = originalFamilyTree;
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
