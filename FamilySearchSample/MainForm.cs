@@ -7,7 +7,7 @@ namespace FamilySearchSample
     public partial class MainForm : Form
     {
         //Family search tree.
-        FamilySearchFamilyTree ft;
+        FamilySearchFamilyTree demoFamilyTree;
 
         //Use the Sandbox.
         bool useSandbox = true;
@@ -38,7 +38,7 @@ namespace FamilySearchSample
                     if (authenticateMe(MyUserId, MyPassword, MyDeveloperKey))
                     {
                         //Display access token.
-                        txtToken.Text = ft.CurrentAccessToken;
+                        txtToken.Text = demoFamilyTree.CurrentAccessToken;
                     }
                 }
             }
@@ -69,12 +69,12 @@ namespace FamilySearchSample
             Cursor.Current = Cursors.WaitCursor;
 
             //Initialize the Family Tree Objects.
-            ft = new FamilySearchFamilyTree(useSandbox);
+            demoFamilyTree = new FamilySearchFamilyTree(useSandbox);
 
             try
             {
                 //Try to authenticate.
-                ft.AuthenticateViaOAuth2Password(pUserID, pPassword, pDeveloperKey);
+                demoFamilyTree.AuthenticateViaOAuth2Password(pUserID, pPassword, pDeveloperKey);
 
                 //Switch on buttons.
                 EnableButtons();
@@ -104,7 +104,7 @@ namespace FamilySearchSample
 
         private void btnFindById_Click(object sender, EventArgs e)
         {
-            using (var myForm = new PersonById(ft))
+            using (var myForm = new PersonById(demoFamilyTree))
             {
                 //Don't care about return result at this point.
                 myForm.ShowDialog();
@@ -113,7 +113,7 @@ namespace FamilySearchSample
 
         private void btnCurrentUser_Click(object sender, EventArgs e)
         {
-            using (var myCurrentUserForm = new CurrentUser(ft))
+            using (var myCurrentUserForm = new CurrentUser(demoFamilyTree))
             {
                 //We start with Wait Cursor.
                 Cursor.Current = Cursors.WaitCursor;
@@ -132,7 +132,7 @@ namespace FamilySearchSample
 
         private void btnReadPersonFamily_Click(object sender, EventArgs e)
         {
-            using (var myReadPersonsFamilyForm = new PersonFamily(ft))
+            using (var myReadPersonsFamilyForm = new PersonFamily(demoFamilyTree))
             {
                 //Don't care about return result at this point.
                 myReadPersonsFamilyForm.ShowDialog();
@@ -141,7 +141,7 @@ namespace FamilySearchSample
 
         private void btnPersonSearch_Click(object sender, EventArgs e)
         {
-            using (var myPersonSearchForm = new PersonSearch(ft))
+            using (var myPersonSearchForm = new PersonSearch(demoFamilyTree))
             {                       
                 //Again, don't care about return result at this point.
                 myPersonSearchForm.ShowDialog();
@@ -150,7 +150,7 @@ namespace FamilySearchSample
 
         private void btnPersonAncestry_Click(object sender, EventArgs e)
         {
-            using (var myPersonAncestrySearchForm = new PersonAncestry(ft))
+            using (var myPersonAncestrySearchForm = new PersonAncestry(demoFamilyTree))
             {
                 //Again, don't care about return result at this point.
                 myPersonAncestrySearchForm.ShowDialog();

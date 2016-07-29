@@ -135,10 +135,10 @@ namespace FamilySearchSample
                     txtDateOriginal.Text = myFact.Date.Original;
                     txtDateFormal.Text = myFact.Date.Formal;
 
-                    //Make sure List is not empty.
+                    //Make sure List contains  any elements.
                     if (myFact.Date.NormalizedExtensions.Any())
                     {
-                        //Hack Vorsicht: hard coded.
+                        //Hack Vorsicht: hard coded. Only interested in the first element.
                         txtDateNormalized.Text = myFact.Date.NormalizedExtensions[0].Value;
                     }
                 }

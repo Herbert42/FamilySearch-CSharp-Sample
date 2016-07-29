@@ -166,7 +166,7 @@ namespace FamilySearchSample
                     //Make sure List is not empty.
                     if (myFact.Date.NormalizedExtensions.Any())
                     {
-                        //Hack Vorsicht: hard coded.
+                        //Hack Vorsicht: hard coded. Only interested in the first element.
                         txtDateNormalized.Text = myFact.Date.NormalizedExtensions[0].Value;
                     }
                 }

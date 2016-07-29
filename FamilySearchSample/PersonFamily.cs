@@ -50,8 +50,7 @@ namespace FamilySearchSample
                 //We actually do something. Remember cursor and change to wait-cursor.
                 var cursorState = Cursor;
                 Cursor = Cursors.WaitCursor;
-
-                //ToDo remove this
+               
                 //Copy ID to label. This way it is visible and saved.
                 lblPersonID.Text = txtPersonId.Text;
 

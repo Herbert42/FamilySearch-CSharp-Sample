@@ -30,8 +30,7 @@ namespace FamilySearchSample
             //Remember cursor and change to wait-cursor.
             var cursorState = Cursor;
             Cursor = Cursors.WaitCursor;
-
-            //Hack Vorsicht hard coded.
+            
             lblErrorMessage.Text = "No Error.";
 
             try

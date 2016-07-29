@@ -41,8 +41,9 @@ namespace FamilySearchSample
                 lblPersonID.Text = txtPersonId.Text;
 
                 //Display person's data.
-                //Boolean result not needed at this point. Intended for future extensions.
-                bool displayResult = displayPersonsAncestry(lblPersonID.Text);
+                //N.B. Boolean result not needed at this point. Intended for future extensions.
+                //bool displayResult = displayPersonsAncestry(lblPersonID.Text); 
+                displayPersonsAncestry(lblPersonID.Text);
             }
 
             //Restore Cursor.
