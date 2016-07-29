@@ -102,7 +102,7 @@ namespace FamilySearchSample
             listBoxDisplayAncestry.Items.Clear();
 
             //With numberOfGenerations Generatons, the proband being number 1, we have a max of
-            //((2 to the power of numberOfGenerations) - 1) Ahnen-Numbers (Ascendency Numbers)
+            //((2 to the power of numberOfGenerations) - 1) Ahnen-Numbers (Ancestry Numbers)
             for (int index = 1; index <= Math.Pow(2, numberOfGenerations) - 1; index++)
             {
                 //Define an Ancestor as Node.
